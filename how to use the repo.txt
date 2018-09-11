@@ -9,7 +9,9 @@ Downloading the latest repo
       $cd desktop/recycleMe
       $git init
       $git remote add origin https://github.com/mattripia/recycleme.git
-      $git pull
+      $git fetch origin master
+      $git reset --hard FETCH_HEAD
+      $git clean -df
 6. open android studio and look for the directory you created
 
 --------------------------------------------------------------------------
