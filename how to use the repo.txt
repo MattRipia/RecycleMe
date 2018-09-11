@@ -1,0 +1,25 @@
+--------------------------------------------------------------------------
+Downloading the latest repo
+--------------------------------------------------------------------------
+1. download git - https://git-scm.com/downloads
+2. install git
+3. create an empty folder named 'RecycleMe'
+4. open git BASH
+5. type 
+      $cd desktop/recycleMe
+      $git init
+      $git remote add origin https://github.com/mattripia/recycleme.git
+      $git pull
+6. open android studio and look for the directory you created
+
+--------------------------------------------------------------------------
+Making changes to the repo
+--------------------------------------------------------------------------
+1. open git BASH
+2. type 
+      $cd desktop/recycleMe
+      $git remote add origin https://github.com/mattripia/recycleme.git
+      $git add files .
+                    (or use *)
+      $git commit -m "Commit comment"
+      $git push -f origin master 
