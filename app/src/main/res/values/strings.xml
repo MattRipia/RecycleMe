@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">RecycleMe</string>
+    <string name="location">Location</string>
+    <string name="profile">Profile</string>
+    <string name="settings">Settings</string>
+    <string name="facebook_app_id">415410462197076</string>
+    <string name="fb_login_protocol_scheme">fb415410462197076</string>
+    <string name="title_activity_account">AccountActivity</string>
+</resources>

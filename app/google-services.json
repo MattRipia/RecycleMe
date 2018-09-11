@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "447863665017",
+    "firebase_url": "https://recycleme-autuni.firebaseio.com",
+    "project_id": "recycleme-autuni",
+    "storage_bucket": "recycleme-autuni.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:447863665017:android:21f934591fb1bab9",
+        "android_client_info": {
+          "package_name": "ripia.matt.recycleme"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "447863665017-cahej74s9pgjmd82ch1a9c7o4bad6v71.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "ripia.matt.recycleme",
+            "certificate_hash": "070874560f9e79168be5f8b7188703669c542a7f"
+          }
+        },
+        {
+          "client_id": "447863665017-d5ajtcvrs13huldi929i4ij1k01dm5n4.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBaYFb2Z2Vv6qHsX2_JvbQMy9dUsSICvag"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "447863665017-d5ajtcvrs13huldi929i4ij1k01dm5n4.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
