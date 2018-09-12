@@ -35,6 +35,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
 
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -47,6 +48,7 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
     CallbackManager callbackManager;
     GoogleApiClient nGoogleApiClient;
     FirebaseAuth firebaseAuth;
+    GoogleSignInAccount account = null;
 
     // the buttons which need referencing
     private SignInButton googleSignInButton;
@@ -61,7 +63,9 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
     private String connectionString = "jdbc:jtds:sqlserver://mattripia.database.windows.net:1433/RecycleMe;user=mattripia@mattripia;password=Hello1234;encrypt=true;trustServerCertificate=false;hostNameInCertificate=*.database.windows.net;loginTimeout=30;";
     private String driverName = "net.sourceforge.jtds.jdbc.Driver";
     public  Connection conn = null;
-    public  Statement stmt = null;
+    public  Statement statement = null;
+    public  User currentUser = null;
+    private String googleEmail = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -91,8 +95,6 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
 
         //gets the current instance of the program, used to check if a user has authenticated already
         firebaseAuth = FirebaseAuth.getInstance();
-
-        initializeDb();
         setupButtonsMain();
     }
 
@@ -152,9 +154,6 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);
 
-        // test query, inserts a new value into the db for testing purpose
-        String query = "insert into item values('192-198221-912','coke',0)";
-
         try {
             // loading the driver jtds
             Class.forName(driverName);
@@ -167,21 +166,17 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
         try {
             // establishing a connection to the db and running the test statement
             conn = DriverManager.getConnection(connectionString);
-            stmt = conn.createStatement();
-            stmt.executeUpdate(query);
 
         } catch (Exception e) {
 
            Log.d("debug sql exception", " " + e);
         }
-
-        closeDB();
     }
 
     public void closeDB() {
         try {
             conn.close();
-            stmt.close();
+            statement.close();
         } catch (SQLException e) {
             Log.d("debug sql close ex - ", " " + e);
         }
@@ -190,29 +185,76 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
     private void logout() {
 
         this.firebaseAuth.signOut();
+        closeDB();
 
         try
         {
             LoginManager.getInstance().logOut();
         }
         catch(Exception e) {
+            Log.d("logout exception", " " + e);
         }
 
         updateUI(null);
     }
 
     // once a user successfully logs in, this method is called, changes the UI to the camera activity
-    public void updateUI(FirebaseUser currentUser) {
-        if(currentUser == null)
+    public void updateUI(FirebaseUser firebaseUser) {
+        if(firebaseUser == null)
         {
             setContentView(R.layout.activity_main);
             setupButtonsMain();
         }
         else
         {
-            Toast.makeText(getApplicationContext(),"UpdateUi Hit", Toast.LENGTH_LONG).show();
+            //Toast.makeText(getApplicationContext(),"UpdateUi Hit", Toast.LENGTH_LONG).show();
+            initializeDb();
+            setupUser(firebaseUser);
             setContentView(R.layout.activity_account);
             setupButtonsLoggedIn();
+        }
+    }
+
+    // this method checks the database to see a users details.
+    // if there is no user in the database, a new user is created with a unique id used to identify them
+    // if a user is already in the database, load the details into the 'currentUser' object
+    private void setupUser(FirebaseUser firebaseUser) {
+
+        currentUser = new User();
+        ResultSet rs;
+        currentUser.setName(firebaseUser.getDisplayName());
+        currentUser.setUniqueID(firebaseUser.getUid());
+
+        String queryUser = "select * from account where uniqueid = '" + currentUser.getUniqueID() + "'";
+
+        try {
+            statement = conn.createStatement();
+            rs = statement.executeQuery(queryUser);
+
+            // a user already exists in the database, pull their data now!
+            if(rs.next())
+            {
+                // indexes for sql start at 1 -- gets all the user data from the account table and puts it into a user object
+                currentUser.setUniqueID(rs.getString(1));
+                currentUser.setName(rs.getString(2));
+                currentUser.setAddress(rs.getString(3));
+                currentUser.setPoints(rs.getInt(4));
+                Toast.makeText(this, "got the user details from database!", Toast.LENGTH_LONG).show();
+            }
+            // a user doesn't exist in the database, create a new record now!
+            else
+            {
+                String insertUser = "insert into account values('"
+                                  + currentUser.getUniqueID() + "','"
+                                  + currentUser.getName()  + "','"
+                                  + currentUser.getAddress() + "',"
+                                  + currentUser.getPoints() + ")";
+                statement.executeUpdate(insertUser);
+                Toast.makeText(this, "inserted a new user " + currentUser.getUniqueID() +" as one was not found!", Toast.LENGTH_LONG).show();
+            }
+        } catch (SQLException e) {
+            Toast.makeText(this, "something went wrong in setupUser" + e, Toast.LENGTH_LONG).show();
+            Log.d("SetupUser tag exception", " " + e);
         }
     }
 
@@ -294,12 +336,12 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
 
             try {
                 // Google Sign In was successful, authenticate with Firebase
-                GoogleSignInAccount account = task.getResult(ApiException.class);
+                account = task.getResult(ApiException.class);
                 firebaseAuthWithGoogle(account);
 
             } catch (ApiException e) {
                 // Google Sign In failed, update UI appropriately
-                Toast.makeText(this, "Google login failed", Toast.LENGTH_LONG);
+                Toast.makeText(this, "Google login failed", Toast.LENGTH_LONG).show();
             }
         }
         else
