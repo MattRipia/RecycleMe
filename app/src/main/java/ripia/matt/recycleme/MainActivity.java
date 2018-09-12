@@ -268,7 +268,7 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
     private void facebookLogin() {
 
         callbackManager = CallbackManager.Factory.create();
-        facebookSignInButton.setReadPermissions("email", "public_profile");
+        facebookSignInButton.setReadPermissions("email", "public_profile", "user_friends");
         facebookSignInButton.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
             @Override
             public void onSuccess(LoginResult loginResult) {
