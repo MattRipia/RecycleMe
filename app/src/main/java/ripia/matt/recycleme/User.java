@@ -2,12 +2,14 @@ package ripia.matt.recycleme;
 
 public class User {
 
+    private String uniqueID;
     private String name;
     private String address;
     private int points;
 
     public User() {
         this.name = "unknown";
+        this.uniqueID = "unknown";
         this.address = "unknown";
         this.points = 0;
     }
@@ -34,5 +36,13 @@ public class User {
 
     public void setPoints(int points) {
         this.points = points;
+    }
+
+    public String getUniqueID() {
+        return uniqueID;
+    }
+
+    public void setUniqueID(String uniqueID) {
+        this.uniqueID = uniqueID;
     }
 }
