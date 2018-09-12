@@ -342,6 +342,8 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
             } catch (ApiException e) {
                 // Google Sign In failed, update UI appropriately
                 Toast.makeText(this, "Google login failed", Toast.LENGTH_LONG).show();
+                Log.d("google sign in log", " error - " + e.getStackTrace());
+                Log.d("google sign in log", " error - " + e.getMessage());
             }
         }
         else
@@ -366,6 +368,7 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
 
                     // If sign in fails, display a message to the user.
                     Toast.makeText(getApplicationContext(),"firebase auth with google - failed!", Toast.LENGTH_LONG).show();
+                    Log.d("google firebase auth", "sign in with google on firebase failed");
                 }
             }
         });
