@@ -290,6 +290,7 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
 
                 Toast.makeText(getApplicationContext(),"Something went wrong!", Toast.LENGTH_LONG).show();
                 Log.d(TAG, "Facebook:On Error" + error.getStackTrace());
+                Log.d(TAG, "Facebook:On Error" + error.getMessage());
             }
         });
     }
