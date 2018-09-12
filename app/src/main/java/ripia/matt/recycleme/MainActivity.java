@@ -65,7 +65,6 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
     public  Connection conn = null;
     public  Statement statement = null;
     public  User currentUser = null;
-    private String googleEmail = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -290,7 +289,7 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
             public void onError(FacebookException error) {
 
                 Toast.makeText(getApplicationContext(),"Something went wrong!", Toast.LENGTH_LONG).show();
-                Log.d(TAG, "Facebook:On Error" + error);
+                Log.d(TAG, "Facebook:On Error" + error.getStackTrace());
             }
         });
     }
