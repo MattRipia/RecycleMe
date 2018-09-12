@@ -290,7 +290,7 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
             public void onError(FacebookException error) {
 
                 Toast.makeText(getApplicationContext(),"Something went wrong!", Toast.LENGTH_LONG).show();
-                Log.d(TAG, "Facebook:On Error");
+                Log.d(TAG, "Facebook:On Error" + error);
             }
         });
     }
