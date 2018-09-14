@@ -8,6 +8,8 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.facebook.AccessToken;
@@ -54,6 +56,10 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
     private SignInButton googleSignInButton;
     private LoginButton  facebookSignInButton;
     private Button logoutButton;
+    private Button guestLogin;
+    private Button scan;
+    private Button zone;
+    private TextView profileText;
 
 
     // variables
@@ -101,18 +107,29 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
         // gets the id of the buttons from the xml file and creates them locally so they can be 'pressed'
         googleSignInButton = findViewById(R.id.sign_in_button);
         facebookSignInButton = findViewById(R.id.facebook_login_button);
+        guestLogin = findViewById(R.id.guest_login);
 
         // creates event listeners when a button is pressed
         googleSignInButton.setOnClickListener(this);
         facebookSignInButton.setOnClickListener(this);
+        guestLogin.setOnClickListener(this);
     }
 
     private void setupButtonsLoggedIn() {
         // gets the id of the buttons from the xml file and creates them locally so they can be 'pressed'
         logoutButton = findViewById(R.id.logout_button);
+        profileText = findViewById(R.id.user_detail_text);
+        zone = findViewById(R.id.zone_button);
+        scan = findViewById(R.id.scan_button);
+
+        profileText.setText("User         - " + currentUser.getName() + "\n"
+                           +"Points      - " + currentUser.getPoints() + "\n"
+                           +"Address   - " + currentUser.getAddress());
 
         // creates event listeners when a button is pressed
         logoutButton.setOnClickListener(this);
+        zone.setOnClickListener(this);
+        scan.setOnClickListener(this);
     }
 
     @Override
@@ -143,6 +160,38 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
             case R.id.logout_button:
                 logout();
                 break;
+            case R.id.guest_login:
+                GuestLogin();
+                break;
+            case R.id.zone_button:
+                Zone();
+                break;
+            case R.id.scan_button:
+                Scan();
+                break;
+        }
+    }
+
+    private void Scan() {
+        // Jaime King to add his code here
+        Toast.makeText(this, "Jaime needs to do his job lol",Toast.LENGTH_LONG).show();
+    }
+
+    private void Zone() {
+        // Ali Zihan Rasheed to add his code here
+        Toast.makeText(this, "Ali needs to do his job lol",Toast.LENGTH_LONG).show();
+    }
+
+    private void GuestLogin() {
+
+        try {
+            firebaseAuth.signInAnonymously();
+            FirebaseUser currentUser = firebaseAuth.getCurrentUser();
+            updateUI(currentUser);
+
+        } catch(Exception e)
+        {
+            Log.d("guest login", " " + e.getMessage());
         }
     }
 
