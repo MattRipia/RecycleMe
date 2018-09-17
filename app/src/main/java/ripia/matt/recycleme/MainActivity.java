@@ -1,14 +1,13 @@
 package ripia.matt.recycleme;
 
+import android.content.Context;
 import android.content.Intent;
-import android.os.StrictMode;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -49,6 +48,7 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
     FirebaseAuth firebaseAuth;
     GoogleSignInAccount account = null;
     User currentUser = null;
+    Item currentItem = null;
     Database database;
 
     // the buttons which need referencing
@@ -93,7 +93,9 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
 
         //gets the current instance of the program, used to check if a user has authenticated already
         firebaseAuth = FirebaseAuth.getInstance();
+        currentItem = new Item();
         currentUser = new User();
+        database = new Database();
         setupButtonsMain();
     }
 
@@ -119,7 +121,7 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
         profileText.setText("User          - " + currentUser.getName() + "\n"
                 + "Points       - " + currentUser.getPoints() + "\n"
                 + "Address    - " + currentUser.getAddress() + "\n"
-                + "Last Scanned - " + currentUser.getLastScanned());
+                + "Last Scanned - " + currentItem.getBarcode());
 
         // creates event listeners when a button is pressed
         logoutButton.setOnClickListener(this);
@@ -145,7 +147,7 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
             setupButtonsMain();
         } else {
             //Toast.makeText(getApplicationContext(),"UpdateUi Hit", Toast.LENGTH_LONG).show();
-            database = new Database();
+
             setupUser(firebaseUser);
             setContentView(R.layout.activity_account);
             setupButtonsLoggedIn();
@@ -304,13 +306,19 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
 
             IntentResult scanningResult = IntentIntegrator.parseActivityResult(requestCode, resultCode, data);
 
-            if (scanningResult != null) {
-                //String scanFormat = scanningResult.getFormatName();
+            //successful scan, create a new item object to hold the barcode, then query the db to see if this exists
+            // if an item exists, the recycling number is taken, if not then the user is asked to input this
 
-                //successful scan, saving code into scan content
-                currentUser.setLastScanned(scanningResult.getContents());
+            if (scanningResult != null)
+            {
+                currentItem.setBarcode(scanningResult.getContents());
+                currentUser.setPoints(currentUser.getPoints() + 10);
+                database.checkItemInDatabase(currentItem);
                 updateUI(firebaseAuth.getCurrentUser());
-            } else {
+
+            }
+            else
+            {
                 Toast toast = Toast.makeText(getApplicationContext(), "No scan data received!", Toast.LENGTH_SHORT);
                 toast.show();
             }

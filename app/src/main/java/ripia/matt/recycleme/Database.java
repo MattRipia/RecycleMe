@@ -111,4 +111,48 @@ public class Database {
 
         return currentUser;
     }
+
+    public void checkItemInDatabase(Item item){
+
+        ResultSet rs;
+        String queryItem = "select * from item where barcode = '" + item.getBarcode() + "'";
+
+        try {
+            statement = conn.createStatement();
+            rs = statement.executeQuery(queryItem);
+
+            // an item already exists in the database, pull its data now!
+            if(rs.next())
+            {
+                rs.getInt(4);
+                Log.d("checkItemInDatabase", " Item Exists in DB");
+            }
+            else  // an item doesn't exist in the database, create a new record now!
+            {
+
+                // this if statement will ask the user for their help in putting in the recycling number
+                // to-do
+                if(item.getRecyclingNumber() == 0 )
+                {
+
+                }
+
+                String insertItem = "insert into item values('"
+                + item.getBarcode() + "',' ',' ',"
+                + item.getRecyclingNumber()+ ")";
+
+                statement.executeUpdate(insertItem);
+                Log.d("checkUserInDatabase", " New user inserted");
+            }
+
+        } catch (SQLException e) {
+
+        Log.d("checkItemInDatabase ex", " " + e);
+        }
+    }
 }
+
+
+
+
+
