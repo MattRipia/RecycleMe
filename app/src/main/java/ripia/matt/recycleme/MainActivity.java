@@ -43,9 +43,13 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.Statement;
 
+//Imports for ZXing barcode scanner
+import com.google.zxing.integration.android.IntentIntegrator;
+import com.google.zxing.integration.android.IntentResult;
+
 
 public class MainActivity extends AppCompatActivity implements GoogleApiClient.OnConnectionFailedListener, View.OnClickListener{
-
+//hi
     // facebook / google / firebase API's
     CallbackManager callbackManager;
     GoogleApiClient nGoogleApiClient;
@@ -64,6 +68,7 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
 
     // variables
     private int RC_SIGN_IN = 9001;
+    private int SCAN_RESULT = 49374;
     private String TAG = "FACELOG";
     private String googleReqID = "447863665017-d5ajtcvrs13huldi929i4ij1k01dm5n4.apps.googleusercontent.com";
     private String connectionString = "jdbc:jtds:sqlserver://mattripia.database.windows.net:1433/RecycleMe;user=mattripia@mattripia;password=Hello1234;encrypt=true;trustServerCertificate=false;hostNameInCertificate=*.database.windows.net;loginTimeout=30;";
@@ -174,7 +179,10 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
 
     private void Scan() {
         // Jaime King to add his code here
-        Toast.makeText(this, "Jaime needs to do his job lol",Toast.LENGTH_LONG).show();
+        IntentIntegrator scanIntegrator = new IntentIntegrator(this);
+        //Start Scanning
+        scanIntegrator.initiateScan();
+
     }
 
     private void Zone() {
@@ -394,6 +402,20 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
                 Log.d("google sign in log", " error - " + e.getStackTrace());
                 Log.d("google sign in log", " error - " + e.getMessage());
             }
+        }
+        else if (requestCode == SCAN_RESULT) {
+            IntentResult scanningResult = IntentIntegrator.parseActivityResult(requestCode, resultCode, data);
+
+                if (scanningResult != null) {
+                    //successful scan, saving code into scan content
+                    String scanContent = scanningResult.getContents();
+                    String scanFormat = scanningResult.getFormatName();
+                    Toast.makeText(this, "Code" + scanContent, Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast toast = Toast.makeText(getApplicationContext(),
+                            "No scan data received!", Toast.LENGTH_SHORT);
+                    toast.show();
+                }
         }
         else
         {
