@@ -6,11 +6,12 @@ public class User {
     private String name;
     private String address;
     private int points;
+    private String lastScanned;
 
     public User() {
-        this.name = "unknown";
-        this.uniqueID = "unknown";
-        this.address = "unknown";
+        this.name = "";
+        this.uniqueID = "";
+        this.address = "";
         this.points = 0;
     }
 
@@ -44,5 +45,13 @@ public class User {
 
     public void setUniqueID(String uniqueID) {
         this.uniqueID = uniqueID;
+    }
+
+    public String getLastScanned() {
+        return lastScanned;
+    }
+
+    public void setLastScanned(String lastScanned) {
+        this.lastScanned = lastScanned;
     }
 }

@@ -49,7 +49,7 @@ import com.google.zxing.integration.android.IntentResult;
 
 
 public class MainActivity extends AppCompatActivity implements GoogleApiClient.OnConnectionFailedListener, View.OnClickListener{
-//hi
+
     // facebook / google / firebase API's
     CallbackManager callbackManager;
     GoogleApiClient nGoogleApiClient;
@@ -67,9 +67,9 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
 
 
     // variables
-    private int RC_SIGN_IN = 9001;
-    private int SCAN_RESULT = 49374;
-    private String TAG = "FACELOG";
+    private int GOOGLE_ID = 9001;
+    private int SCAN_ID = 49374;
+    private int FACEBOOK_ID = 64206;
     private String googleReqID = "447863665017-d5ajtcvrs13huldi929i4ij1k01dm5n4.apps.googleusercontent.com";
     private String connectionString = "jdbc:jtds:sqlserver://mattripia.database.windows.net:1433/RecycleMe;user=mattripia@mattripia;password=Hello1234;encrypt=true;trustServerCertificate=false;hostNameInCertificate=*.database.windows.net;loginTimeout=30;";
     private String driverName = "net.sourceforge.jtds.jdbc.Driver";
@@ -105,6 +105,7 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
 
         //gets the current instance of the program, used to check if a user has authenticated already
         firebaseAuth = FirebaseAuth.getInstance();
+        currentUser = new User();
         setupButtonsMain();
     }
 
@@ -127,9 +128,10 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
         zone = findViewById(R.id.zone_button);
         scan = findViewById(R.id.scan_button);
 
-        profileText.setText("User         - " + currentUser.getName() + "\n"
-                           +"Points      - " + currentUser.getPoints() + "\n"
-                           +"Address   - " + currentUser.getAddress());
+        profileText.setText("User          - " + currentUser.getName() + "\n"
+                           +"Points       - " + currentUser.getPoints() + "\n"
+                           +"Address    - " + currentUser.getAddress() + "\n"
+                           +"Last Scanned - " + currentUser.getLastScanned());
 
         // creates event listeners when a button is pressed
         logoutButton.setOnClickListener(this);
@@ -151,7 +153,7 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
     }
 
     @Override
-    // when either the facebook or google sign in buttons are clicked
+    // determines which button was pressed and what to do
     public void onClick(View v)
     {
         switch(v.getId())
@@ -177,15 +179,16 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
         }
     }
 
+    // starts the scanner app and returns an item
     private void Scan() {
-        // Jaime King to add his code here
-        IntentIntegrator scanIntegrator = new IntentIntegrator(this);
-        //Start Scanning
-        scanIntegrator.initiateScan();
 
+        //Start Scanning
+        IntentIntegrator scanIntegrator = new IntentIntegrator(this);
+        scanIntegrator.initiateScan();
     }
 
     private void Zone() {
+
         // Ali Zihan Rasheed to add his code here
         Toast.makeText(this, "Ali needs to do his job lol",Toast.LENGTH_LONG).show();
     }
@@ -204,6 +207,7 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
     }
 
     // initialises the db object where we will communicate with our database
+    // creates a driver using jtds which is used to query the microsoft sql server
     private void initializeDb() {
 
         // This prevents the app from crashing as internet i/o shouldn't be completed on the main thread
@@ -215,8 +219,7 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
             Class.forName(driverName);
 
         } catch (Exception e) {
-
-            Log.d("debug cnf exception- ", " " + e);
+            Log.d("debug driver exception ", " " + e);
         }
 
         try {
@@ -224,7 +227,6 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
             conn = DriverManager.getConnection(connectionString);
 
         } catch (Exception e) {
-
            Log.d("debug sql exception", " " + e);
         }
     }
@@ -233,6 +235,7 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
         try {
             conn.close();
             statement.close();
+
         } catch (SQLException e) {
             Log.d("debug sql close ex - ", " " + e);
         }
@@ -246,6 +249,7 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
         try
         {
             LoginManager.getInstance().logOut();
+
         }
         catch(Exception e) {
             Log.d("logout exception", " " + e);
@@ -276,19 +280,16 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
     // if a user is already in the database, load the details into the 'currentUser' object
     private void setupUser(FirebaseUser firebaseUser) {
 
-        currentUser = new User();
         ResultSet rs;
         currentUser.setName(firebaseUser.getDisplayName());
         currentUser.setUniqueID(firebaseUser.getUid());
-
         String queryUser = "select * from account where uniqueid = '" + currentUser.getUniqueID() + "'";
 
         try {
             statement = conn.createStatement();
             rs = statement.executeQuery(queryUser);
 
-            // a user already exists in the database, pull their data now!
-            if(rs.next())
+            if(rs.next()) // a user already exists in the database, pull their data now!
             {
                 // indexes for sql start at 1 -- gets all the user data from the account table and puts it into a user object
                 currentUser.setUniqueID(rs.getString(1));
@@ -297,14 +298,10 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
                 currentUser.setPoints(rs.getInt(4));
                 Toast.makeText(this, "got the user details from database!", Toast.LENGTH_LONG).show();
             }
-            // a user doesn't exist in the database, create a new record now!
-            else
+            else  // a user doesn't exist in the database, create a new record now!
             {
-                String insertUser = "insert into account values('"
-                                  + currentUser.getUniqueID() + "','"
-                                  + currentUser.getName()  + "','"
-                                  + currentUser.getAddress() + "',"
-                                  + currentUser.getPoints() + ")";
+                String insertUser = "insert into account values('" + currentUser.getUniqueID() + "','" + currentUser.getName()  + "','"
+                                                                   + currentUser.getAddress()  + "',"  + currentUser.getPoints()+ ")";
                 statement.executeUpdate(insertUser);
                 Toast.makeText(this, "inserted a new user " + currentUser.getUniqueID() +" as one was not found!", Toast.LENGTH_LONG).show();
             }
@@ -314,40 +311,43 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
         }
     }
 
-    // the user wants to sign in with google
+    // the user wants to sign in with google, start this activity now
     private void googleLogin() {
 
         Intent signIntent = Auth.GoogleSignInApi.getSignInIntent(nGoogleApiClient);
-        startActivityForResult(signIntent, RC_SIGN_IN);
+        startActivityForResult(signIntent, GOOGLE_ID);
     }
 
-    // the user wants to sign in with facebook
+    // the user wants to sign in with facebook, sets the facebook permissions and starts a new activity
+    // onActivityResult is called when onSuccess is hit, meaning a user has logged into facebook successfully
+    // the facebook access token is then handled
     private void facebookLogin() {
+
 
         callbackManager = CallbackManager.Factory.create();
         facebookSignInButton.setReadPermissions("email", "public_profile", "user_friends");
         facebookSignInButton.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
+
             @Override
             public void onSuccess(LoginResult loginResult) {
 
                 // if a user tries to login
-                Log.d(TAG, "Facebook:On Success" + loginResult);
                 handleFacebookAccessToken(loginResult.getAccessToken());
+                Log.d("facebook log", "Facebook:On Success" + loginResult);
             }
 
             @Override
             public void onCancel() {
 
                 Toast.makeText(getApplicationContext(),"You canceled something!", Toast.LENGTH_LONG).show();
-                Log.d(TAG, "Facebook:On Cancel");
+                Log.d("facebook log", "Facebook:On Cancel");
             }
 
             @Override
             public void onError(FacebookException error) {
 
                 Toast.makeText(getApplicationContext(),"Something went wrong!", Toast.LENGTH_LONG).show();
-                Log.d(TAG, "Facebook:On Error" + error.getStackTrace());
-                Log.d(TAG, "Facebook:On Error" + error.getMessage());
+                Log.d("facebook log", "Facebook:On Error" + error.getMessage());
             }
         });
     }
@@ -361,15 +361,15 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
 
-                if(task.isSuccessful())
-                {
-                    FirebaseUser aUser = firebaseAuth.getCurrentUser();
-                    updateUI(aUser);
-                }
-                else
-                {
-                    Toast.makeText(getApplicationContext(),"Authentication failed.", Toast.LENGTH_LONG).show();
-                }
+            if(task.isSuccessful())
+            {
+                FirebaseUser aUser = firebaseAuth.getCurrentUser();
+                updateUI(aUser);
+            }
+            else
+            {
+                Toast.makeText(getApplicationContext(),"Authentication failed.", Toast.LENGTH_LONG).show();
+            }
             }
         });
     }
@@ -387,7 +387,8 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
     {
         super.onActivityResult(requestCode,resultCode,data);
 
-        if(requestCode == RC_SIGN_IN)
+        // the activity that just completed was a google activity
+        if(requestCode == GOOGLE_ID)
         {
             Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
 
@@ -399,25 +400,31 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
             } catch (ApiException e) {
                 // Google Sign In failed, update UI appropriately
                 Toast.makeText(this, "Google login failed", Toast.LENGTH_LONG).show();
-                Log.d("google sign in log", " error - " + e.getStackTrace());
                 Log.d("google sign in log", " error - " + e.getMessage());
             }
         }
-        else if (requestCode == SCAN_RESULT) {
+        // the activity that just completed was a scanner activity
+        else if (requestCode == SCAN_ID)
+        {
+
             IntentResult scanningResult = IntentIntegrator.parseActivityResult(requestCode, resultCode, data);
 
-                if (scanningResult != null) {
-                    //successful scan, saving code into scan content
-                    String scanContent = scanningResult.getContents();
-                    String scanFormat = scanningResult.getFormatName();
-                    Toast.makeText(this, "Code" + scanContent, Toast.LENGTH_SHORT).show();
-                } else {
-                    Toast toast = Toast.makeText(getApplicationContext(),
-                            "No scan data received!", Toast.LENGTH_SHORT);
-                    toast.show();
-                }
+            if (scanningResult != null)
+            {
+                //String scanFormat = scanningResult.getFormatName();
+
+                //successful scan, saving code into scan content
+                currentUser.setLastScanned(scanningResult.getContents());
+                updateUI(firebaseAuth.getCurrentUser());
+            }
+            else
+            {
+                Toast toast = Toast.makeText(getApplicationContext(), "No scan data received!", Toast.LENGTH_SHORT);
+                toast.show();
+            }
         }
-        else
+        // the activity that just completed was a facebook activity
+        else if(requestCode == FACEBOOK_ID)
         {
             callbackManager.onActivityResult(requestCode, resultCode, data);
         }
@@ -430,17 +437,18 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
         firebaseAuth.signInWithCredential(credential).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
-                if (task.isSuccessful()) {
+            if (task.isSuccessful()) {
 
-                    // Sign in success, update UI with the signed-in user's information
-                    FirebaseUser user = firebaseAuth.getCurrentUser();
-                    updateUI(user);
-                } else {
+                // Sign in success, update UI with the signed-in user's information
+                FirebaseUser user = firebaseAuth.getCurrentUser();
+                updateUI(user);
+            } else {
 
-                    // If sign in fails, display a message to the user.
-                    Toast.makeText(getApplicationContext(),"firebase auth with google - failed!", Toast.LENGTH_LONG).show();
-                    Log.d("google firebase auth", "sign in with google on firebase failed");
-                }
+                // If sign in fails, display a message to the user.
+                updateUI(firebaseAuth.getCurrentUser());
+                Toast.makeText(getApplicationContext(),"firebase auth with google - failed!", Toast.LENGTH_LONG).show();
+                Log.d("google firebase auth", "sign in with google on firebase failed");
+            }
             }
         });
     }
