@@ -2,9 +2,7 @@ package ripia.matt.recycleme;
 
 public class Item {
 
-    private String barcode;
-    private String description;
-    private String brand;
+    private String barcode, description, brand;
     private int recyclingNumber;
 
     public Item() {

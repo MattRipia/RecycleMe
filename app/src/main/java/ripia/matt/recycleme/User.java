@@ -2,9 +2,7 @@ package ripia.matt.recycleme;
 
 public class User {
 
-    private String uniqueID;
-    private String name;
-    private String address;
+    private String uniqueID, name, address;
     private int points;
 
 

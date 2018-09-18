@@ -54,10 +54,7 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
     // the buttons which need referencing
     private SignInButton googleSignInButton;
     private LoginButton facebookSignInButton;
-    private Button logoutButton;
-    private Button guestLogin;
-    private Button scan;
-    private Button zone;
+    private Button logoutButton, guestLogin, scan, zone;
     private TextView profileText;
 
     // primitive variables
