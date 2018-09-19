@@ -77,6 +77,18 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 Toast.makeText(this, "Log Out", Toast.LENGTH_SHORT).show();
                 logout();
                 break;
+            case R.id.nav_notifications:
+                Toast.makeText(this, "Notifications", Toast.LENGTH_SHORT).show();
+                break;
+            case R.id.nav_share:
+                Toast.makeText(this, "Share", Toast.LENGTH_SHORT).show();
+                break;
+            case R.id.nav_contact_us:
+                Toast.makeText(this, "Contact Us", Toast.LENGTH_SHORT).show();
+                break;
+            case R.id.nav_about:
+                Toast.makeText(this, "About Us", Toast.LENGTH_SHORT).show();
+                break;
         }
 
         drawer.closeDrawer(GravityCompat.START);
@@ -97,7 +109,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         this.firebaseAuth.signOut();
         database.closeDB();
-
+        Log.d("logout", "logout hit");
         try {
             LoginManager.getInstance().logOut();
 
@@ -106,6 +118,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         }
 
         startActivity(new Intent(this, SplashActivity.class));
+        Log.d("logout", "logout end");
+
         finish();
     }
 }

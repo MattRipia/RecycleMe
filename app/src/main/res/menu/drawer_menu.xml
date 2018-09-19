@@ -24,7 +24,29 @@
                 android:id="@+id/nav_log_out"
                 android:icon="@drawable/ic_logout"
                 android:title="Log Out"/>
+            <item
+                android:id="@+id/nav_notifications"
+                android:icon="@drawable/ic_notifications"
+                android:title="Notifications"/>
+
         </menu>
     </item>
+    <item android:title="More">
+        <menu>
+            <item
+                android:id="@+id/nav_share"
+                android:icon="@drawable/ic_share"
+                android:title="Share"/>
+            <item
+                android:id="@+id/nav_contact_us"
+                android:icon="@drawable/ic_contact"
+                android:title="Contact Us"/>
+            <item
+                android:id="@+id/nav_about"
+                android:icon="@drawable/ic_about"
+                android:title="About Us"/>
+        </menu>
+    </item>
+
 
 </menu>
