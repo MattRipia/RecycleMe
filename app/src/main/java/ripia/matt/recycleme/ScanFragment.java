@@ -81,6 +81,7 @@ public class ScanFragment extends Fragment implements View.OnClickListener{
                 currentUser.setPoints(currentUser.getPoints() + 10);
                 database.checkItemInDatabase(currentItem);
                 resultText.setText(scanningResult.getContents());
+                Toast.makeText(getActivity(), "Scan success", Toast.LENGTH_SHORT).show();
                 //updateUI(firebaseAuth.getCurrentUser());
 
             } else {

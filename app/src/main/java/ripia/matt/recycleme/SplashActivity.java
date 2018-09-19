@@ -14,6 +14,9 @@ public class SplashActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         Log.d("Splash", "Splash Screen Hit");
 
+        //TODO Make the splash screen show properly
+        setContentView(R.layout.activity_splash);
+
         Intent activityIntent;
 
         // if the user is not found then go to the login screen
