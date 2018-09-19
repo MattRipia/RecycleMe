@@ -17,16 +17,17 @@ public class SplashActivity extends AppCompatActivity {
         Intent activityIntent;
 
         // if the user is not found then go to the login screen
-
-        if (FirebaseAuth.getInstance().getCurrentUser() == null) {
-
+        if (FirebaseAuth.getInstance().getCurrentUser() == null)
+        {
             activityIntent = new Intent(this, LoginActivity.class);
             Log.d("Splash", "User not found");
-
-        } else {
+        }
+        else
+        {
             activityIntent = new Intent(this, MainActivity.class);
             Log.d("Splash", "User Found");
         }
+
         startActivity(activityIntent);
         finish();
     }

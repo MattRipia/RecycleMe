@@ -46,19 +46,15 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
     GoogleApiClient nGoogleApiClient;
     FirebaseAuth firebaseAuth;
     GoogleSignInAccount account = null;
-    User currentUser = null;
-    Item currentItem = null;
-    Database database;
+
 
     // the buttons which need referencing
     private SignInButton googleSignInButton;
     private LoginButton facebookSignInButton;
-    private Button logoutButton, guestLogin, scan, zone;
-    private TextView profileText;
+    private Button guestLogin;
 
     // primitive variables
     private int GOOGLE_ID = 9001;
-    private int SCAN_ID = 49374;
     private int FACEBOOK_ID = 64206;
     private String googleReqID = "447863665017-d5ajtcvrs13huldi929i4ij1k01dm5n4.apps.googleusercontent.com";
 
@@ -89,13 +85,10 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
 
         //gets the current instance of the program, used to check if a user has authenticated already
         firebaseAuth = FirebaseAuth.getInstance();
-        currentItem = new Item();
-        currentUser = new User();
-        database = new Database();
-        setupButtonsMain();
+        setupButtons();
     }
 
-    private void setupButtonsMain() {
+    private void setupButtons() {
         // gets the id of the buttons from the xml file and creates them locally so they can be 'pressed'
         googleSignInButton = findViewById(R.id.sign_in_button);
         facebookSignInButton = findViewById(R.id.facebook_login_button);
@@ -105,24 +98,6 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
         googleSignInButton.setOnClickListener(this);
         facebookSignInButton.setOnClickListener(this);
         guestLogin.setOnClickListener(this);
-    }
-
-    private void setupButtonsLoggedIn() {
-        // gets the id of the buttons from the xml file and creates them locally so they can be 'pressed'
-        logoutButton = findViewById(R.id.logout_button);
-        profileText = findViewById(R.id.user_detail_text);
-        zone = findViewById(R.id.zone_button);
-        scan = findViewById(R.id.scan_button);
-
-        profileText.setText("User          - " + currentUser.getName() + "\n"
-                + "Points       - " + currentUser.getPoints() + "\n"
-                + "Address    - " + currentUser.getAddress() + "\n"
-                + "Last Scanned - " + currentItem.getBarcode());
-
-        // creates event listeners when a button is pressed
-        logoutButton.setOnClickListener(this);
-        zone.setOnClickListener(this);
-        scan.setOnClickListener(this);
     }
 
     @Override
@@ -136,17 +111,11 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
         }
     }
 
-    // once a user successfully logs in, this method is called, changes the UI to the camera activity
+    // once a user successfully logs in, this method is called, changes the UI to the main activity
     public void updateUI(FirebaseUser firebaseUser) {
-        if (firebaseUser == null) {
-            setContentView(R.layout.activity_login);
-            setupButtonsMain();
-        } else {
-            //Toast.makeText(getApplicationContext(),"UpdateUi Hit", Toast.LENGTH_LONG).show();
-
-            setupUser(firebaseUser);
-            setContentView(R.layout.activity_account);
-            setupButtonsLoggedIn();
+        if (firebaseUser != null) {
+            startActivity(new Intent(this, MainActivity.class));
+            finish();
         }
     }
 
@@ -160,46 +129,14 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
             case R.id.facebook_login_button:
                 facebookLogin();
                 break;
-            case R.id.logout_button:
-                logout();
-                break;
             case R.id.guest_login:
                 GuestLogin();
                 break;
-            case R.id.zone_button:
-                Zone();
-                break;
-            case R.id.scan_button:
-                Scan();
-                break;
+
         }
-    }
-
-    private void logout() {
-
-        this.firebaseAuth.signOut();
-        database.closeDB();
-
-        try {
-            LoginManager.getInstance().logOut();
-
-        } catch (Exception e) {
-            Log.d("logout exception", " " + e);
-        }
-
-        updateUI(null);
-    }
-
-    // this method checks the database to see a users details.
-    // if there is no user in the database, a new user is created with a unique id used to identify them
-    // if a user is already in the database, load the details into the 'currentUser' object
-    private void setupUser(FirebaseUser firebaseUser) {
-
-        currentUser = database.checkUserInDatabase(firebaseUser, currentUser);
     }
 
     private void GuestLogin() {
-
         try {
             firebaseAuth.signInAnonymously();
             FirebaseUser currentUser = firebaseAuth.getCurrentUser();
@@ -221,7 +158,6 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
     // onActivityResult is called when onSuccess is hit, meaning a user has logged into facebook successfully
     // the facebook access token is then handled
     private void facebookLogin() {
-
 
         callbackManager = CallbackManager.Factory.create();
         facebookSignInButton.setReadPermissions("email", "public_profile", "user_friends");
@@ -297,28 +233,7 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
                 Log.d("google sign in log", " error - " + e.getMessage());
             }
         }
-        // the activity that just completed was a scanner activity
-        else if (requestCode == SCAN_ID) {
 
-            IntentResult scanningResult = IntentIntegrator.parseActivityResult(requestCode, resultCode, data);
-
-            //successful scan, create a new item object to hold the barcode, then query the db to see if this exists
-            // if an item exists, the recycling number is taken, if not then the user is asked to input this
-
-            if (scanningResult != null)
-            {
-                currentItem.setBarcode(scanningResult.getContents());
-                currentUser.setPoints(currentUser.getPoints() + 10);
-                database.checkItemInDatabase(currentItem);
-                updateUI(firebaseAuth.getCurrentUser());
-
-            }
-            else
-            {
-                Toast toast = Toast.makeText(getApplicationContext(), "No scan data received!", Toast.LENGTH_SHORT);
-                toast.show();
-            }
-        }
         // the activity that just completed was a facebook activity
         else if (requestCode == FACEBOOK_ID) {
             callbackManager.onActivityResult(requestCode, resultCode, data);
@@ -348,13 +263,7 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
         });
     }
 
-    // starts the scanner app and returns an item
-    private void Scan() {
 
-        //Start Scanning
-        IntentIntegrator scanIntegrator = new IntentIntegrator(this);
-        scanIntegrator.initiateScan();
-    }
 
     private void Zone() {
 

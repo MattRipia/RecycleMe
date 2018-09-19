@@ -7,19 +7,23 @@
         <item
             android:id="@+id/nav_home"
             android:icon="@drawable/ic_home"
-            android:title="Home" />
+            android:title="Home"/>
+        <item
+            android:id="@+id/nav_scan"
+            android:icon="@drawable/ic_scan"
+            android:title="Scan"/>
         <item
             android:id="@+id/nav_account"
             android:icon="@drawable/ic_account"
-            android:title="Account" />
+            android:title="Account"/>
     </group>
 
     <item android:title="Manage">
         <menu>
             <item
-                android:id="@+id/log_out"
+                android:id="@+id/nav_log_out"
                 android:icon="@drawable/ic_logout"
-                android:title="Log Out" />
+                android:title="Log Out"/>
         </menu>
     </item>
 
