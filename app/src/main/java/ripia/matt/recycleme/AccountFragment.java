@@ -24,8 +24,6 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.firebase.auth.FirebaseAuth;
-
 import java.util.List;
 import java.util.Locale;
 
@@ -33,21 +31,17 @@ public class AccountFragment extends Fragment implements View.OnClickListener{
 
     private Button zoneButton, locationButton;
     private TextView profileText;
-    private User currentUser = new User();
-    private Item currentItem = new Item();
-    private Database database = new Database();
 
     private LocationManager locationManager;
     private double doubleLattitude, doubleLongitude;
+    private Globals globals;
+
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        currentUser = database.checkUserInDatabase(FirebaseAuth.getInstance().getCurrentUser(), currentUser);
-        currentItem = new Item();
-
-
+        globals = globals.getInstance();
     }
 
     @Nullable
@@ -68,10 +62,10 @@ public class AccountFragment extends Fragment implements View.OnClickListener{
 
     private void update() {
 
-        profileText.setText("User          - " + currentUser.getName() + "\n"
-                + "Points       - " + currentUser.getPoints() + "\n"
-                + "Address    - " + currentUser.getAddress() + "\n"
-                + "Last Scanned - " + currentItem.getBarcode());
+        profileText.setText("User          - " + globals.getCurrentUser().getName() + "\n"
+                + "Points       - " + globals.getCurrentUser().getPoints() + "\n"
+                + "Address    - " + globals.getCurrentUser().getAddress() + "\n"
+                + "Last Scanned - " + globals.getCurrentItem().getBarcode());
     }
 
 
@@ -116,7 +110,7 @@ public class AccountFragment extends Fragment implements View.OnClickListener{
             String streetName = addresses.get(0).getThoroughfare();
             String postCode = addresses.get(0).getPostalCode();
 
-            currentUser.setAddress(streetNo + " "  + streetName + ", "  + postCode);
+            globals.getCurrentUser().setAddress(streetNo + " "  + streetName + ", "  + postCode);
 
         } catch (Exception e) {
             Log.d("getCurrentLocation", "error -" + e.getMessage());

@@ -42,7 +42,7 @@ public class Database {
 
     // initialises the db object where we will communicate with our database
     // creates a driver using jtds which is used to query the microsoft sql server
-    public void initializeDb() {
+    private void initializeDb() {
 
         // This prevents the app from crashing as internet i/o shouldn't be completed on the main thread
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
@@ -74,9 +74,10 @@ public class Database {
         }
     }
 
-    public User checkUserInDatabase(FirebaseUser firebaseUser, User currentUser){
+    public User createCurrentUser(FirebaseUser firebaseUser){
 
         ResultSet rs;
+        User currentUser= new User();
         currentUser.setName(firebaseUser.getDisplayName());
         currentUser.setUniqueID(firebaseUser.getUid());
         String queryUser = "select * from account where uniqueid = '" + currentUser.getUniqueID() + "'";
@@ -132,10 +133,9 @@ public class Database {
             {
 
                 // this if statement will ask the user for their help in putting in the recycling number
-                // to-do
                 if(item.getRecyclingNumber() == 0 )
                 {
-
+                    //TODO need to impliment method to get the user to enter item information
                 }
 
                 String insertItem = "insert into item values('"

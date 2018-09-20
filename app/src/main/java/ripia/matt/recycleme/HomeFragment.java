@@ -11,17 +11,13 @@ import android.widget.FrameLayout;
 
 public class HomeFragment extends Fragment {
 
-    private FrameLayout fragmentContainer;
-
-    User currentUser = null;
-    Item currentItem = null;
-    Database database;
+    private Globals globals;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-
+        globals = globals.getInstance();
     }
 
     @Nullable

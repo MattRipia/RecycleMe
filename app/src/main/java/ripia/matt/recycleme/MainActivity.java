@@ -17,15 +17,14 @@ import android.widget.Toast;
 
 import com.facebook.login.LoginManager;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 import java.text.MessageFormat;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
 
     private DrawerLayout drawer;
-    private FrameLayout fragmentContainer;
-    private Database database;
-    private FirebaseAuth firebaseAuth;
+    private Globals globals;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,7 +38,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        fragmentContainer = findViewById(R.id.fragment_container);
+
+        globals = globals.getInstance();
+        globals.setDatabase(new Database());
+        globals.setCurrentItem(new Item());
+        globals.setCurrentUser(globals.getDatabase().createCurrentUser(FirebaseAuth.getInstance().getCurrentUser()));
+
 
         //This code creates and controls the hamburger icon for the menu
         //        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawer, toolbar,
@@ -54,9 +58,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         drawer.addDrawerListener(toggle);
         toggle.syncState();
-
-        firebaseAuth = FirebaseAuth.getInstance();
-        database = new Database();
 
         //Starts the main activity with the home screen in view
         getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
@@ -115,8 +116,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     }
     private void logout() {
 
-        this.firebaseAuth.signOut();
-        database.closeDB();
+        FirebaseAuth.getInstance().signOut();
+        globals.getDatabase().closeDB();
         Log.d("logout", "logout hit");
         try {
             LoginManager.getInstance().logOut();
@@ -136,5 +137,4 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         Log.d("MainActivity", "onActivityResult hit in main activity");
         super.onActivityResult(requestCode, resultCode, data);
     }
-
 }
