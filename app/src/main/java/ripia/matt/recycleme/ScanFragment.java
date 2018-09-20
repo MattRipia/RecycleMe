@@ -24,7 +24,6 @@ public class ScanFragment extends Fragment implements View.OnClickListener{
     private static final int SCAN_ID = 49374;
     private Globals globals;
 
-
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

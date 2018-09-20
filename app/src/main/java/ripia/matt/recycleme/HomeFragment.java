@@ -7,11 +7,12 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.FrameLayout;
+import android.widget.TextView;
 
 public class HomeFragment extends Fragment {
 
     private Globals globals;
+    private TextView welcomeText;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -23,6 +24,9 @@ public class HomeFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_home, container, false);
+        View view = inflater.inflate(R.layout.fragment_home, container, false);
+
+        welcomeText = view.findViewById(R.id.welcome_text);
+        return view;
     }
 }
