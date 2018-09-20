@@ -38,7 +38,6 @@ public class AccountFragment extends Fragment implements View.OnClickListener{
     private Database database = new Database();
 
     private LocationManager locationManager;
-    private String stringLattitude, stringLongitude;
     private double doubleLattitude, doubleLongitude;
 
     @Override

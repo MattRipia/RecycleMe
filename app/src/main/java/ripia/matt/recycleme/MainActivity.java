@@ -42,8 +42,16 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         fragmentContainer = findViewById(R.id.fragment_container);
 
         //This code creates and controls the hamburger icon for the menu
+        //        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawer, toolbar,
+        //                R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+
+        //  ** ^---- im not sure why that code doesnt work with the "R.string.navigation_drawer_open, R.string.navigation_drawer_close" parameters
+        //  **       so i replaced those with 0's just to get it working... @jaime
+        
+        //This code creates and controls the hamburger icon for the menu
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawer, toolbar,
-                R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+                0, 0);
+
         drawer.addDrawerListener(toggle);
         toggle.syncState();
 
