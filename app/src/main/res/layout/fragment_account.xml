@@ -2,58 +2,57 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@android:color/holo_green_light">
+    android:background="@android:color/background_light">
 
     <ImageView
         android:id="@+id/logo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="11dp"
-        android:layout_marginTop="50dp"
-        android:layout_marginRight="5dp"
         android:layout_marginLeft="5dp"
-        android:src="@drawable/recycleme_logo"
-/>
+        android:layout_marginRight="5dp"
+        android:layout_marginTop="50dp"
+        android:src="@drawable/recycleme_logo" />
 
     <TextView
         android:id="@+id/text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="10dp"
-        android:text="@string/recycleme_details"
         android:layout_below="@id/logo"
-/>
+        android:layout_marginLeft="10dp"
+        android:text="@string/recycleme_details" />
+
     <TextView
         android:id="@+id/profile_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="10dp"
-        android:text="Profile:"
         android:layout_below="@id/text"
-        />
+        android:layout_marginLeft="10dp"
+        android:text="Profile:" />
 
     <TextView
         android:id="@+id/user_detail_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="10dp"
-        android:text="Details"
         android:layout_below="@id/profile_text"
-/>
+        android:layout_marginLeft="10dp"
+        android:text="Details" />
 
     <Button
         android:id="@+id/zone_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignTop="@+id/logo"
-        android:layout_toEndOf="@+id/logo"
+        android:layout_alignParentBottom="true"
+        android:layout_centerInParent="true"
+        android:layout_marginBottom="20dp"
         android:text="Zone" />
 
     <Button
         android:id="@+id/address_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
-        android:layout_alignTop="@+id/logo"
+        android:layout_alignBaseline="@+id/zone_button"
+        android:layout_alignParentBottom="true"
+        android:layout_alignTop="@+id/zone_button"
         android:text="Get Address" />
 </RelativeLayout>

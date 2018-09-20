@@ -15,11 +15,14 @@ import android.widget.Toast;
 
 import com.facebook.login.LoginManager;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.zxing.integration.android.IntentIntegrator;
+import com.google.zxing.integration.android.IntentResult;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
 
     private DrawerLayout drawer;
     NavigationView navigationView;
+    private static final int SCAN_ID = 49374;
     private Globals globals;
 
     @Override
@@ -109,6 +112,32 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         }
         else {
             super.onBackPressed();
+        }
+    }
+
+    @Override
+    // after a user logs in with either facebook or google, this method is called.
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        // the activity that just completed was a scanner activity
+        if (requestCode == SCAN_ID) {
+
+            IntentResult scanningResult = IntentIntegrator.parseActivityResult(requestCode, resultCode, data);
+
+            //successful scan, create a new item object to hold the barcode, then query the db to see if this exists
+            // if an item exists, the recycling number is taken, if not then the user is asked to input this
+            if (scanningResult != null) {
+                globals.getCurrentItem().setBarcode(scanningResult.getContents());
+                globals.getCurrentUser().setPoints(globals.getCurrentUser().getPoints() + 10);
+                globals.getDatabase().checkItemInDatabase(globals.getCurrentItem());
+                Toast.makeText(this, "Scan success", Toast.LENGTH_SHORT).show();
+
+                //Re initializing the scan fragment to update the result field
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
+                        new ScanFragment(),"scan_fragment").commit();
+            } else {
+                Toast.makeText(this, "No scan data received!", Toast.LENGTH_SHORT).show();
+            }
         }
     }
 
