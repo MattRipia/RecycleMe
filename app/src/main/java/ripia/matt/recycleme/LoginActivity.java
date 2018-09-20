@@ -40,8 +40,6 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
     FirebaseAuth firebaseAuth;
     GoogleSignInAccount account = null;
 
-    //changes
-
     // the buttons which need referencing
     private SignInButton googleSignInButton;
     private LoginButton facebookSignInButton;
