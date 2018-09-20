@@ -29,13 +29,12 @@ import java.util.Locale;
 
 public class AccountFragment extends Fragment implements View.OnClickListener{
 
-    private Button zoneButton, locationButton;
+    private Button zoneButton, addressButton;
     private TextView profileText;
 
     private LocationManager locationManager;
-    private double doubleLattitude, doubleLongitude;
+    private double latitude, longitude;
     private Globals globals;
-
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -50,10 +49,10 @@ public class AccountFragment extends Fragment implements View.OnClickListener{
 
         View view = inflater.inflate(R.layout.fragment_account, container, false);
         zoneButton = view.findViewById(R.id.zone_button);
-        locationButton = view.findViewById(R.id.address_button);
+        addressButton = view.findViewById(R.id.address_button);
         profileText = view.findViewById(R.id.user_detail_text);
 
-        locationButton.setOnClickListener(this);
+        addressButton.setOnClickListener(this);
         zoneButton.setOnClickListener(this);
 
         update();
@@ -101,7 +100,7 @@ public class AccountFragment extends Fragment implements View.OnClickListener{
         List<Address> addresses;
 
         try {
-            addresses = geocoder.getFromLocation(doubleLattitude, doubleLongitude,  1);
+            addresses = geocoder.getFromLocation(latitude, longitude,  1);
 
             // hardcoded lat/long test for matts address!
             //addresses = geocoder.getFromLocation(-36.901954, 174.699831,  1);
@@ -115,7 +114,6 @@ public class AccountFragment extends Fragment implements View.OnClickListener{
         } catch (Exception e) {
             Log.d("getCurrentLocation", "error -" + e.getMessage());
         }
-
     }
 
     // sets the coordinates of 'currentUser'
@@ -125,9 +123,7 @@ public class AccountFragment extends Fragment implements View.OnClickListener{
                 != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission
                 (getActivity(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED)
         {
-
             ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 1);
-
         }
         else
         {
@@ -141,20 +137,20 @@ public class AccountFragment extends Fragment implements View.OnClickListener{
             // if none of these ways produces a latitude or longitude then a toast message is shown.
             if (networkLocation != null)
             {
-                doubleLattitude = networkLocation.getLatitude();
-                doubleLongitude = networkLocation.getLongitude();
+                latitude = networkLocation.getLatitude();
+                longitude = networkLocation.getLongitude();
                 Log.d("networkLocation used", " ");
             }
             else  if (gpsLocation != null)
             {
-                doubleLattitude = gpsLocation.getLatitude();
-                doubleLongitude = gpsLocation.getLongitude();
+                latitude = gpsLocation.getLatitude();
+                longitude = gpsLocation.getLongitude();
                 Log.d("gpsLocation used", " ");
             }
             else  if (providerLocation != null)
             {
-                doubleLattitude = providerLocation.getLatitude();
-                doubleLongitude = providerLocation.getLongitude();
+                latitude = providerLocation.getLatitude();
+                longitude = providerLocation.getLongitude();
                 Log.d("providerLocation used", "");
             }
             else

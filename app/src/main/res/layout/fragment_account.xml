@@ -10,8 +10,8 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="11dp"
         android:layout_marginTop="50dp"
-        android:layout_marginRight="10dp"
-        android:layout_marginLeft="10dp"
+        android:layout_marginRight="5dp"
+        android:layout_marginLeft="5dp"
         android:src="@drawable/recycleme_logo"
 />
 
@@ -44,7 +44,6 @@
     <Button
         android:id="@+id/zone_button"
         android:layout_width="wrap_content"
-
         android:layout_height="wrap_content"
         android:layout_alignTop="@+id/logo"
         android:layout_toEndOf="@+id/logo"
