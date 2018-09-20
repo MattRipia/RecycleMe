@@ -40,12 +40,21 @@
         android:text="Details"
         android:layout_below="@id/profile_text"
 />
+
     <Button
+        android:id="@+id/zone_button"
+        android:layout_width="wrap_content"
+
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/logo"
+        android:layout_toEndOf="@+id/logo"
+        android:text="Zone" />
+
+    <Button
+        android:id="@+id/address_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="50dp"
-
-        android:text="Zone"
-        android:id="@+id/zone_button"
-        android:layout_toRightOf="@id/logo"/>
+        android:layout_alignParentEnd="true"
+        android:layout_alignTop="@+id/logo"
+        android:text="Get Address" />
 </RelativeLayout>
