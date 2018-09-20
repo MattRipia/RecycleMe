@@ -4,6 +4,7 @@ import com.google.firebase.auth.FirebaseUser;
 
 public class User {
 
+    //change
     private String uniqueID, name, address;
     private int points;
 
