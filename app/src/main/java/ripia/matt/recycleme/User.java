@@ -1,5 +1,7 @@
 package ripia.matt.recycleme;
 
+import com.google.firebase.auth.FirebaseUser;
+
 public class User {
 
     private String uniqueID, name, address;

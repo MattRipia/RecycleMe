@@ -57,6 +57,7 @@ public class Database {
 
         try { // establishing a connection to the db and running the test statement
             conn = DriverManager.getConnection(connectionString);
+            statement = conn.createStatement();
 
         } catch (Exception e) {
             Log.d("debug sql exception", " " + e);
@@ -81,7 +82,7 @@ public class Database {
         String queryUser = "select * from account where uniqueid = '" + currentUser.getUniqueID() + "'";
 
         try {
-            statement = conn.createStatement();
+            //statement = conn.createStatement();
             rs = statement.executeQuery(queryUser);
 
             // a user already exists in the database, pull their data now!
@@ -118,7 +119,7 @@ public class Database {
         String queryItem = "select * from item where barcode = '" + item.getBarcode() + "'";
 
         try {
-            statement = conn.createStatement();
+            //statement = conn.createStatement();
             rs = statement.executeQuery(queryItem);
 
             // an item already exists in the database, pull its data now!
