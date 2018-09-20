@@ -22,8 +22,6 @@ import java.text.MessageFormat;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
 
-    //test
-
     private DrawerLayout drawer;
     private FrameLayout fragmentContainer;
     private Database database;
