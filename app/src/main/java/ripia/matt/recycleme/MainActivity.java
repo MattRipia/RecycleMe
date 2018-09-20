@@ -122,4 +122,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         finish();
     }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        Log.d("MainActivity", "onActivityResult hit in main activity");
+        super.onActivityResult(requestCode, resultCode, data);
+    }
+
 }

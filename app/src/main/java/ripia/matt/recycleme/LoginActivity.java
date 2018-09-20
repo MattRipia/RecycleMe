@@ -1,20 +1,18 @@
 package ripia.matt.recycleme;
 
 import android.content.Intent;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.facebook.AccessToken;
 import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
 import com.facebook.FacebookException;
-import com.facebook.login.LoginManager;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
 import com.google.android.gms.auth.api.Auth;
@@ -25,7 +23,6 @@ import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.SignInButton;
 import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.common.api.GoogleApiClient;
-
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthCredential;
@@ -35,13 +32,9 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
 
-//Imports for ZXing barcode scanner
-import com.google.zxing.integration.android.IntentIntegrator;
-import com.google.zxing.integration.android.IntentResult;
-
 public class LoginActivity extends AppCompatActivity implements GoogleApiClient.OnConnectionFailedListener, View.OnClickListener {
 
-    // Variables for logging in, users and databases
+    // Variables for logging in and databases
     CallbackManager callbackManager;
     GoogleApiClient nGoogleApiClient;
     FirebaseAuth firebaseAuth;
@@ -53,21 +46,17 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
     private LoginButton facebookSignInButton;
     private Button guestLogin;
 
-    // primitive variables
-    private int GOOGLE_ID = 9001;
-    private int FACEBOOK_ID = 64206;
+    // request codes to determine where activity results come from
+    private static final int GOOGLE_ID = 9001;
+    private static final int FACEBOOK_ID = 64206;
+
+    //String used to verify app with google sign on
     private String googleReqID = "447863665017-d5ajtcvrs13huldi929i4ij1k01dm5n4.apps.googleusercontent.com";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-        setup();
-    }
-
-    // this method sets up the database, google sign in, and firebase sdk objects
-    private void setup() {
 
         // creates a new google sign in option type
         GoogleSignInOptions gso = new GoogleSignInOptions
@@ -78,17 +67,13 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
 
         // creates the google api client, uses to connect to the google servers
         nGoogleApiClient = new GoogleApiClient.Builder(this)
-                        .enableAutoManage(this, this)
-                        .addApi(Auth.GOOGLE_SIGN_IN_API, gso)
-                        .build();
-
+                .enableAutoManage(this, this)
+                .addApi(Auth.GOOGLE_SIGN_IN_API, gso)
+                .build();
 
         //gets the current instance of the program, used to check if a user has authenticated already
         firebaseAuth = FirebaseAuth.getInstance();
-        setupButtons();
-    }
 
-    private void setupButtons() {
         // gets the id of the buttons from the xml file and creates them locally so they can be 'pressed'
         googleSignInButton = findViewById(R.id.sign_in_button);
         facebookSignInButton = findViewById(R.id.facebook_login_button);
@@ -132,7 +117,6 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
             case R.id.guest_login:
                 GuestLogin();
                 break;
-
         }
     }
 
@@ -233,7 +217,6 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
                 Log.d("google sign in log", " error - " + e.getMessage());
             }
         }
-
         // the activity that just completed was a facebook activity
         else if (requestCode == FACEBOOK_ID) {
             callbackManager.onActivityResult(requestCode, resultCode, data);
@@ -261,13 +244,5 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
                 }
             }
         });
-    }
-
-
-
-    private void Zone() {
-
-        // Ali Zihan Rasheed to add his code here
-        Toast.makeText(this, "Ali needs to do his job lol", Toast.LENGTH_LONG).show();
     }
 }

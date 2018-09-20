@@ -20,8 +20,8 @@ public class AccountFragment extends Fragment implements View.OnClickListener {
 
     private Button zoneButton;
     private TextView profileText;
-    private User currentUser;
-    private Item currentItem = null;
+    private User currentUser = new User();
+    private Item currentItem = new Item();
     private Database database = new Database();
 
 
@@ -29,7 +29,6 @@ public class AccountFragment extends Fragment implements View.OnClickListener {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        currentUser = new User();
         currentUser = database.checkUserInDatabase(FirebaseAuth.getInstance().getCurrentUser(), currentUser);
         currentItem = new Item();
 

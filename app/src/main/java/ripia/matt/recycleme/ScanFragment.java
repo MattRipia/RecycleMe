@@ -24,7 +24,7 @@ public class ScanFragment extends Fragment implements View.OnClickListener{
     private User currentUser = new User();
     private Item currentItem = null;
     private Database database = new Database();
-    private int SCAN_ID = 49374;
+    private static final int SCAN_ID = 49374;
 
 
     @Override
@@ -75,18 +75,15 @@ public class ScanFragment extends Fragment implements View.OnClickListener{
 
             //successful scan, create a new item object to hold the barcode, then query the db to see if this exists
             // if an item exists, the recycling number is taken, if not then the user is asked to input this
-
             if (scanningResult != null) {
                 currentItem.setBarcode(scanningResult.getContents());
                 currentUser.setPoints(currentUser.getPoints() + 10);
                 database.checkItemInDatabase(currentItem);
                 resultText.setText(scanningResult.getContents());
                 Toast.makeText(getActivity(), "Scan success", Toast.LENGTH_SHORT).show();
-                //updateUI(firebaseAuth.getCurrentUser());
 
             } else {
                 Toast.makeText(getActivity(), "No scan data received!", Toast.LENGTH_SHORT).show();
-
             }
         }
     }
