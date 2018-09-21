@@ -64,7 +64,7 @@ public class QueryRecyclingNumberFragment extends Fragment implements View.OnCli
                 // a user has input a non-valid recycling number, show a toast text explaining this
                 else
                 {
-                    Toast.makeText(getActivity(), "That number is not a valid recycing number", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getActivity(), "That number is not a valid recycling number", Toast.LENGTH_SHORT).show();
                 }
                 break;
 
