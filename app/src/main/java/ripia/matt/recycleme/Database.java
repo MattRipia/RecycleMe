@@ -17,10 +17,12 @@ public class Database {
     private Statement statement = null;
     private String connectionString = "jdbc:jtds:sqlserver://mattripia.database.windows.net:1433/RecycleMe;user=mattripia@mattripia;password=Hello1234;encrypt=true;trustServerCertificate=false;hostNameInCertificate=*.database.windows.net;loginTimeout=30;";
     private String driverName = "net.sourceforge.jtds.jdbc.Driver";
+    private Globals globals;
 
 
     public Database(){
 
+        globals = Globals.getInstance();
         initializeDb();
     }
 
@@ -149,6 +151,23 @@ public class Database {
         } catch (SQLException e) {
 
         Log.d("checkItemInDatabase ex", " " + e);
+        }
+    }
+
+    public void updateDatabase(){
+
+        try {
+            String updateUser = "update account set points = " + globals.getCurrentUser().getPoints()
+                                              + ", address = '" + globals.getCurrentUser().getAddress()
+                                              + "' where uniqueid = '" + globals.getCurrentUser().getUniqueID() + "'";
+
+
+            statement.executeUpdate(updateUser);
+            Log.d("updateDatabase", " user updated");
+
+        } catch (SQLException e) {
+
+            Log.d("updateDatabase", " user update failed - " + e.getMessage());
         }
     }
 }
