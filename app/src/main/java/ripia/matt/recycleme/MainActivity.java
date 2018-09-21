@@ -133,24 +133,47 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         }
     }
 
+    // logs the user out of firebase, google and facebook, saves their data in the database and moves into the login screen again
     private void logout() {
 
-        FirebaseAuth.getInstance().signOut();
-        globals.getDatabase().closeDB();
-
-        //Te ensure that no data from the previous session is passes to the next session.
-        globals = null;
-
         try {
-            LoginManager.getInstance().logOut();
+            globals.getDatabase().updateDatabase();
+            FirebaseAuth.getInstance().signOut();
+            globals.getDatabase().closeDB();
 
-        } catch (Exception e) {
-            Log.d("logout exception", " " + e);
+            //Te ensure that no data from the previous session is passes to the next session.
+            globals = null;
+
+            try {
+                LoginManager.getInstance().logOut();
+
+            } catch (Exception e) {
+                Log.d("logout exception", " " + e);
+            }
+
+            startActivity(new Intent(this, SplashActivity.class));
+            Log.d("logout", "logout end");
+
+            super.finish();
+
+        }catch(Exception e)
+        {
+            Log.d("logout exception" , " error - "+ e.getMessage());
+        }
+    }
+
+    // syncs the current user to the backend database
+    @Override
+    public void finish()
+    {
+        try{
+            globals.getDatabase().updateDatabase();
+
+        } catch (Exception e)
+        {
+            Log.d("finish exception" , " error - " + e.getMessage());
         }
 
-        startActivity(new Intent(this, SplashActivity.class));
-        Log.d("logout", "logout end");
-
-        finish();
+        super.finish();
     }
 }
