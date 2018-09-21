@@ -12,7 +12,7 @@
         android:layout_alignParentEnd="true"
         android:layout_alignTop="@+id/accept_button"
         android:layout_marginEnd="86dp"
-        android:text="Accept" />
+        android:text="Cancel" />
 
     <Button
         android:id="@+id/accept_button"
@@ -22,7 +22,7 @@
         android:layout_alignParentStart="true"
         android:layout_marginBottom="135dp"
         android:layout_marginStart="79dp"
-        android:text="Cancel" />
+        android:text="Accept" />
 
     <TextView
         android:id="@+id/doesnt_exist_text"
@@ -32,7 +32,7 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="25dp"
         android:text="@string/query_recycling_number"
-        android:textSize="20sp" />
+        android:textSize="15sp" />
 
     <TextView
         android:id="@+id/barcode_text"
@@ -42,7 +42,7 @@
         android:layout_alignParentTop="true"
         android:layout_marginStart="41dp"
         android:layout_marginTop="196dp"
-        android:textSize="20sp"
+        android:textSize="15sp"
         android:text="Barcode:" />
 
     <EditText
