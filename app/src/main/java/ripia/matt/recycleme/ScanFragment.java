@@ -22,7 +22,7 @@ public class ScanFragment extends Fragment implements View.OnClickListener{
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        globals = globals.getInstance();
+        globals = Globals.getInstance();
     }
     
     @Nullable
@@ -31,7 +31,7 @@ public class ScanFragment extends Fragment implements View.OnClickListener{
         View view = inflater.inflate(R.layout.fragment_scan, container, false);
         scanButton = view.findViewById(R.id.scan_button);
         resultText = view.findViewById(R.id.result_text);
-        resultText.setText(globals.getCurrentItem().getBarcode());
+        resultText.setText("Barcode: " + globals.getCurrentItem().getBarcode() + "\nRecycling Number: " + globals.getCurrentItem().getRecyclingNumber());
 
         scanButton.setOnClickListener(this);
         return view;

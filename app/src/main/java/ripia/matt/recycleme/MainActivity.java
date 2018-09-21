@@ -111,6 +111,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     // after a user logs in with either facebook or google, this method is called.
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
+
         // the activity that just completed was a scanner activity
         if (requestCode == SCAN_ID)
         {
@@ -127,12 +128,15 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 // if an item exists in the database -> grab that item now then update the currentItem with the recycling number
                 if(itemExists)
                 {
-                    // the item exists in the database UPdate the UI now
+                    // the item exists in the database update the UI now
+                    // Re initializing the scan fragment to update the result field
+                    getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new ScanFragment(),"scan_fragment").commit();
+                    Toast.makeText(this, "Scan success", Toast.LENGTH_SHORT).show();
                 }
                 // if an item doesnt exist in the database, ask the user for a recycling number
                 else
                 {
-                    // TODO ask the user for the item details
+                    // TODO ask the user for the item details // Start a new fragment which gets the user to input a recycling number for that particular barcode
 
 
                     // if the recycling number is between 1 and 8 add this item to the database
@@ -143,10 +147,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     }
                 }
 
-                Toast.makeText(this, "Scan success", Toast.LENGTH_SHORT).show();
-
-                //Re initializing the scan fragment to update the result field
-                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new ScanFragment(),"scan_fragment").commit();
             }
             else
             {
