@@ -137,7 +137,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private void logout() {
 
         try {
-            finish();
+            globals.getDatabase().updateDatabase();
             FirebaseAuth.getInstance().signOut();
             globals.getDatabase().closeDB();
 
@@ -173,5 +173,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         {
             Log.d("finish exception" , " error - " + e.getMessage());
         }
+
+        super.finish();
     }
 }
