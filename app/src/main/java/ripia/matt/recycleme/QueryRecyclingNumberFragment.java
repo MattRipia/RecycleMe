@@ -55,6 +55,7 @@ public class QueryRecyclingNumberFragment extends Fragment implements View.OnCli
                 if(Integer.parseInt(input.getText().toString()) > 0 && Integer.parseInt(input.getText().toString()) < 9)
                 {
                     globals.getCurrentItem().setRecyclingNumber(Integer.parseInt(input.getText().toString()));
+                    Toast.makeText(getActivity(), "Thank you for helping!", Toast.LENGTH_SHORT).show();
                 }
                 else
                 {
