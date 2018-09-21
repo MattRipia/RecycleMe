@@ -37,21 +37,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        globals = globals.getInstance();
+        globals = Globals.getInstance();
         globals.setDatabase(new Database());
         globals.setCurrentItem(new Item());
         globals.setCurrentUser(globals.getDatabase().createCurrentUser(FirebaseAuth.getInstance().getCurrentUser()));
 
         //This code creates and controls the hamburger icon for the menu
-                ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawer, toolbar,
-                        R.string.navigation_drawer_open, R.string.navigation_drawer_close);
-
-        //  ** ^---- im not sure why that code doesnt work with the "R.string.navigation_drawer_open, R.string.navigation_drawer_close" parameters
-        //  **       so i replaced those with 0's just to get it working... @jaime
-        
-        //This code creates and controls the hamburger icon for the menu
-//        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawer, toolbar,
-//                0, 0);
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
 
         drawer.addDrawerListener(toggle);
         toggle.syncState();
@@ -145,8 +137,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         FirebaseAuth.getInstance().signOut();
         globals.getDatabase().closeDB();
+
         //Te ensure that no data from the previous session is passes to the next session.
         globals = null;
+
         try {
             LoginManager.getInstance().logOut();
 
@@ -159,5 +153,4 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         finish();
     }
-
 }
