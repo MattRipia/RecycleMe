@@ -129,7 +129,7 @@ public class Database {
             if(rs.next())
             {
                 itemExists = true;
-                globals.getCurrentItem().setRecyclingNumber(rs.getInt(4));
+                globals.getCurrentItem().setRecNumber(rs.getInt(4));
                 Log.d("checkItemInDatabase", " Item Exists in DB");
             }
             // an item doesn't exist in the database, create a new record now!
@@ -150,7 +150,7 @@ public class Database {
 
         String insertItem = "insert into item values('"
         + globals.getCurrentItem().getBarcode() + "',' ',' ',"
-        + globals.getCurrentItem().getRecyclingNumber()+ ")";
+        + globals.getCurrentItem().getRecNumber()+ ")";
 
         try {
             statement.executeUpdate(insertItem);

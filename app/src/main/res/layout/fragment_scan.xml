@@ -13,12 +13,56 @@
         android:layout_centerInParent="true"/>
 
     <TextView
-        android:id="@+id/result_text"
+        android:id="@+id/last_scanned_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/scan_button"
-        android:layout_centerInParent="true"
-        android:text="Result"
-        android:textSize="30sp"
-        />
+        android:layout_centerHorizontal="true"
+        android:layout_above="@+id/last_scanned_item"
+        android:text="Last Scanned Item"
+        android:textSize="30sp" />
+
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/last_scanned_item"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="20dp"
+        android:background="@android:color/darker_gray"
+        android:gravity="center_vertical"
+        android:orientation="vertical"
+        android:padding="10dp"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark">
+
+        <TextView
+            android:id="@+id/item_rec_number"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_marginRight="10dp"
+            android:background="@android:color/background_light"
+            android:textAlignment="center"
+            android:textColor="@android:color/black"
+            android:textSize="45sp" />
+
+        <TextView
+            android:id="@+id/item_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/item_rec_number"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
+
+        <TextView
+            android:id="@+id/item_brand"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/item_name"
+            android:layout_toRightOf="@+id/item_rec_number"/>
+
+        <TextView
+            android:id="@+id/item_barcode"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/item_brand"
+            android:layout_toRightOf="@+id/item_rec_number"/>
+    </RelativeLayout>
+
 </RelativeLayout>

@@ -12,11 +12,11 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class QueryRecyclingNumberFragment extends Fragment implements View.OnClickListener{
+public class ItemFormFragment extends Fragment implements View.OnClickListener{
 
     private Button accept, cancel;
-    private TextView doesntExistText, barcode;
-    private EditText input;
+    private TextView itemBarcodeText;
+    private EditText itemNameInput, itemBrandInput, itemRecInput;
     private Globals globals;
 
     @Override
@@ -29,15 +29,17 @@ public class QueryRecyclingNumberFragment extends Fragment implements View.OnCli
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
-        View view = inflater.inflate(R.layout.fragment_query_recycling_number, container, false);
+        View view = inflater.inflate(R.layout.fragment_item_form, container, false);
 
         accept = view.findViewById(R.id.accept_button);
         cancel = view.findViewById(R.id.cancel_button);
-        barcode = view.findViewById(R.id.barcode_text);
-        doesntExistText = view.findViewById(R.id.doesnt_exist_text);
-        input = view.findViewById(R.id.number_input);
 
-        barcode.setText("Barcode: " + globals.getCurrentItem().getBarcode());
+        itemBarcodeText = view.findViewById(R.id.item_barcode_text);
+
+        itemNameInput = view.findViewById(R.id.item_name_input);
+        itemBrandInput = view.findViewById(R.id.item_brand_input);
+        itemRecInput = view.findViewById(R.id.item_rec_input);
+        itemBarcodeText.setText("Item Barcode: " + globals.getCurrentItem().getBarcode());
 
         accept.setOnClickListener(this);
         cancel.setOnClickListener(this);
@@ -51,9 +53,12 @@ public class QueryRecyclingNumberFragment extends Fragment implements View.OnCli
             case R.id.accept_button:
 
                 // a user has input a valid recycling number, save this number into the currentItem and update the record in the database
-                if(Integer.parseInt(input.getText().toString()) > 0 && Integer.parseInt(input.getText().toString()) < 9)
+                if(Integer.parseInt(itemRecInput.getText().toString()) > 0 && Integer.parseInt(itemRecInput.getText().toString()) < 9)
                 {
-                    globals.getCurrentItem().setRecyclingNumber(Integer.parseInt(input.getText().toString()));
+                    globals.getCurrentItem().setName(itemNameInput.getText().toString());
+                    globals.getCurrentItem().setBrand(itemBrandInput.getText().toString());
+
+                    globals.getCurrentItem().setRecNumber(Integer.parseInt(itemRecInput.getText().toString()));
                     getFragmentManager().beginTransaction().replace(R.id.fragment_container,
                             new ScanFragment(), "scan_fragment").commit();
 

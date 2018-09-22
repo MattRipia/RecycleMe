@@ -16,7 +16,7 @@ public class ScanFragment extends Fragment implements View.OnClickListener{
 
 
     private Button scanButton;
-    private TextView resultText;
+    private TextView itemName, itemBrand, itemBarcode, itemRecNumber;
     private Globals globals;
 
     @Override
@@ -30,8 +30,19 @@ public class ScanFragment extends Fragment implements View.OnClickListener{
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_scan, container, false);
         scanButton = view.findViewById(R.id.scan_button);
-        resultText = view.findViewById(R.id.result_text);
-        resultText.setText("Barcode: " + globals.getCurrentItem().getBarcode() + "\nRecycling Number: " + globals.getCurrentItem().getRecyclingNumber());
+
+        itemName = view.findViewById(R.id.item_name);
+        itemBrand = view.findViewById(R.id.item_brand);
+        itemBarcode = view.findViewById(R.id.item_barcode);
+        itemRecNumber = view.findViewById(R.id.item_rec_number);
+
+        if (globals.getCurrentItem().getBarcode() != null) {
+
+            itemRecNumber.setText(String.valueOf(globals.getCurrentItem().getRecNumber()));
+            itemName.setText(globals.getCurrentItem().getName());
+            itemBrand.setText(globals.getCurrentItem().getBrand());
+            itemBarcode.setText(globals.getCurrentItem().getBarcode());
+        }
 
         scanButton.setOnClickListener(this);
         return view;

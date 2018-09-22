@@ -138,10 +138,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 {
                     // TODO ask the user for the item details // Start a new fragment which gets the user to input a recycling number for that particular barcode
                     getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                            new QueryRecyclingNumberFragment(),"get_recycling_number_fragment").commit();
+                            new ItemFormFragment(),"get_recycling_number_fragment").commit();
 
                     // if the recycling number is between 1 and 8 add this item to the database
-                    if(globals.getCurrentItem().getRecyclingNumber() > 0 && globals.getCurrentItem().getRecyclingNumber() < 9 )
+                    if(globals.getCurrentItem().getRecNumber() > 0 && globals.getCurrentItem().getRecNumber() < 9 )
                     {
                         globals.getDatabase().addItem();
                         Toast.makeText(this, "Item added to DB", Toast.LENGTH_SHORT).show();
