@@ -12,6 +12,9 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+/**
+ * This fragment is used to gather unknown item details from the user
+ */
 public class ItemFormFragment extends Fragment implements View.OnClickListener{
 
     private Button accept, cancel;
