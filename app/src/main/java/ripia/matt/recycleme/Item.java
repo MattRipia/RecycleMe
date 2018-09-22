@@ -2,15 +2,15 @@ package ripia.matt.recycleme;
 
 public class Item {
 
-    private String barcode, description, brand;
-    private int recyclingNumber;
+    private String name, barcode, brand;
+    private int recNumber;
 
     public Item() {
 
         this.setBarcode(null);
-        this.setDescription(null);
+        this.setName(null);
         this.setBrand(null);
-        this.setRecyclingNumber(0);
+        this.setRecNumber(0);
     }
 
     public String getBarcode() {
@@ -21,12 +21,12 @@ public class Item {
         this.barcode = barcode;
     }
 
-    public String getDescription() {
-        return description;
+    public String getName() {
+        return name;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getBrand() {
@@ -37,12 +37,12 @@ public class Item {
         this.brand = brand;
     }
 
-    public int getRecyclingNumber() {
-        return recyclingNumber;
+    public int getRecNumber() {
+        return recNumber;
     }
 
-    public void setRecyclingNumber(int recyclingNumber) {
-        this.recyclingNumber = recyclingNumber;
+    public void setRecNumber(int recyclingNumber) {
+        this.recNumber = recyclingNumber;
     }
 
 }

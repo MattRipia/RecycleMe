@@ -116,42 +116,50 @@ public class Database {
         return currentUser;
     }
 
-    public void checkItemInDatabase(Item item){
+    public Boolean checkItemInDatabase(Item item){
 
         ResultSet rs;
         String queryItem = "select * from item where barcode = '" + item.getBarcode() + "'";
+        Boolean itemExists = false;
 
         try {
-            //statement = conn.createStatement();
             rs = statement.executeQuery(queryItem);
 
             // an item already exists in the database, pull its data now!
             if(rs.next())
             {
-                rs.getInt(4);
+                itemExists = true;
+                globals.getCurrentItem().setRecNumber(rs.getInt(4));
                 Log.d("checkItemInDatabase", " Item Exists in DB");
             }
-            else  // an item doesn't exist in the database, create a new record now!
+            // an item doesn't exist in the database, create a new record now!
+            else
             {
-
-                // this if statement will ask the user for their help in putting in the recycling number
-                if(item.getRecyclingNumber() == 0 )
-                {
-                    //TODO need to impliment method to get the user to enter item information
-                }
-
-                String insertItem = "insert into item values('"
-                + item.getBarcode() + "',' ',' ',"
-                + item.getRecyclingNumber()+ ")";
-
-                statement.executeUpdate(insertItem);
-                Log.d("checkUserInDatabase", " New user inserted");
+                  itemExists = false;
+                Log.d("checkItemInDatabase", " Item DOES NOT EXIST in DB");
             }
-
         } catch (SQLException e) {
 
         Log.d("checkItemInDatabase ex", " " + e);
         }
+
+        return itemExists;
+    }
+
+    public void addItem() {
+
+        String insertItem = "insert into item values('"
+        + globals.getCurrentItem().getBarcode() + "',' ',' ',"
+        + globals.getCurrentItem().getRecNumber()+ ")";
+
+        try {
+            statement.executeUpdate(insertItem);
+
+        } catch (SQLException e) {
+            Log.d("addItem ex", " error - " + e);
+        }
+
+        Log.d("addItem", " New item inserted");
     }
 
     public void updateDatabase(){

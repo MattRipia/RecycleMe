@@ -111,23 +111,46 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     // after a user logs in with either facebook or google, this method is called.
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        // the activity that just completed was a scanner activity
-        if (requestCode == SCAN_ID) {
 
+        // the activity that just completed was a scanner activity
+        if (requestCode == SCAN_ID)
+        {
             IntentResult scanningResult = IntentIntegrator.parseActivityResult(requestCode, resultCode, data);
 
             //successful scan, create a new item object to hold the barcode, then query the db to see if this exists
             // if an item exists, the recycling number is taken, if not then the user is asked to input this
-            if (scanningResult != null) {
+            if (scanningResult != null)
+            {
                 globals.getCurrentItem().setBarcode(scanningResult.getContents());
                 globals.getCurrentUser().setPoints(globals.getCurrentUser().getPoints() + 10);
-                globals.getDatabase().checkItemInDatabase(globals.getCurrentItem());
-                Toast.makeText(this, "Scan success", Toast.LENGTH_SHORT).show();
+                Boolean itemExists = globals.getDatabase().checkItemInDatabase(globals.getCurrentItem());
 
-                //Re initializing the scan fragment to update the result field
-                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                        new ScanFragment(),"scan_fragment").commit();
-            } else {
+                // if an item exists in the database -> grab that item now then update the currentItem with the recycling number
+                if(itemExists)
+                {
+                    // the item exists in the database update the UI now
+                    // Re initializing the scan fragment to update the result field
+                    getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new ScanFragment(),"scan_fragment").commit();
+                    Toast.makeText(this, "Scan success", Toast.LENGTH_SHORT).show();
+                }
+                // if an item doesnt exist in the database, ask the user for a recycling number
+                else
+                {
+                    // TODO ask the user for the item details // Start a new fragment which gets the user to input a recycling number for that particular barcode
+                    getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
+                            new ItemFormFragment(),"get_recycling_number_fragment").commit();
+
+                    // if the recycling number is between 1 and 8 add this item to the database
+                    if(globals.getCurrentItem().getRecNumber() > 0 && globals.getCurrentItem().getRecNumber() < 9 )
+                    {
+                        globals.getDatabase().addItem();
+                        Toast.makeText(this, "Item added to DB", Toast.LENGTH_SHORT).show();
+                    }
+                }
+
+            }
+            else
+            {
                 Toast.makeText(this, "No scan data received!", Toast.LENGTH_SHORT).show();
             }
         }
