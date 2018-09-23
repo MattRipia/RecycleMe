@@ -1,5 +1,10 @@
 package ripia.matt.recycleme;
 
+/*
+*  this is a class which holds all of the global variables
+*
+*
+* */
 public class Globals {
 
     private Database database;

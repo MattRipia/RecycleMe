@@ -40,7 +40,7 @@ public class AccountFragment extends Fragment implements View.OnClickListener{
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        globals = globals.getInstance();
+        globals = Globals.getInstance();
     }
 
     @Nullable
@@ -101,10 +101,6 @@ public class AccountFragment extends Fragment implements View.OnClickListener{
 
         try {
             addresses = geocoder.getFromLocation(latitude, longitude,  1);
-
-            // hardcoded lat/long test for matts address!
-            //addresses = geocoder.getFromLocation(-36.901954, 174.699831,  1);
-
             String streetNo = addresses.get(0).getFeatureName();
             String streetName = addresses.get(0).getThoroughfare();
             String postCode = addresses.get(0).getPostalCode();
