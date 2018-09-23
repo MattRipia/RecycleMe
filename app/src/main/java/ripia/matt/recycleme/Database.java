@@ -15,7 +15,7 @@ public class Database {
 
     private Connection conn = null;
     private Statement statement = null;
-    private String connectionString = "jdbc:jtds:sqlserver://mattripia.database.windows.net:1433/RecycleMe;user=mattripia@mattripia;password=Hello1234;encrypt=true;trustServerCertificate=false;hostNameInCertificate=*.database.windows.net;loginTimeout=30;";
+    private String connectionString = "jdbc:jtds:sqlserver://recyclemeserver.database.windows.net:1433/Recycleme;user=mattripia@recyclemeserver;password=Hello1234;encrypt=true;trustServerCertificate=false;hostNameInCertificate=*.database.windows.net;loginTimeout=30;";
     private String driverName = "net.sourceforge.jtds.jdbc.Driver";
     private Globals globals;
 
@@ -149,6 +149,11 @@ public class Database {
     }
 
     public void addItem() {
+        Log.d("DB", "item barcode: " + globals.getCurrentItem().getBarcode());
+        Log.d("DB", "item name: " + globals.getCurrentItem().getName());
+        Log.d("DB", "item brand: " + globals.getCurrentItem().getBrand());
+        Log.d("DB", "item rec #: " + globals.getCurrentItem().getRecNumber());
+
 
         String insertItem = "insert into item values('"
         + globals.getCurrentItem().getBarcode() + "','"
