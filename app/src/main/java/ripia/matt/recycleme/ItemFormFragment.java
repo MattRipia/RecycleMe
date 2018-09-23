@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -54,33 +55,61 @@ public class ItemFormFragment extends Fragment implements View.OnClickListener{
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.accept_button:
-
-                // a user has input a valid recycling number, save this number into the currentItem and update the record in the database
-                if(Integer.parseInt(itemRecInput.getText().toString()) > 0 && Integer.parseInt(itemRecInput.getText().toString()) < 9)
-                {
-                    globals.getCurrentItem().setName(itemNameInput.getText().toString());
-                    globals.getCurrentItem().setBrand(itemBrandInput.getText().toString());
-
-                    globals.getCurrentItem().setRecNumber(Integer.parseInt(itemRecInput.getText().toString()));
-                    getFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                            new ScanFragment(), "scan_fragment").commit();
-
-                    // adds the current item into the database, with the used added recycling number.
-                    globals.getDatabase().addItem();
-                    Toast.makeText(getActivity(), "Thank you for helping!", Toast.LENGTH_SHORT).show();
-                }
-                // a user has input a non-valid recycling number, show a toast text explaining this
-                else
-                {
-                    Toast.makeText(getActivity(), "That number is not a valid recycling number", Toast.LENGTH_SHORT).show();
-                }
+                setItemDetails();
                 break;
-
             case R.id.cancel_button:
                 Toast.makeText(getActivity(), "Cancel Pressed", Toast.LENGTH_SHORT).show();
                 getFragmentManager().beginTransaction().replace(R.id.fragment_container,
                         new ScanFragment(), "scan_fragment").commit();
                 break;
         }
+    }
+
+    public void setItemDetails() {
+
+        // a user has input a valid recycling number, save this number into the currentItem and update the record in the database
+        boolean verifiedItem = checkItemDetails(itemRecInput.getText().toString());
+
+        if(verifiedItem)
+        {
+            globals.getCurrentItem().setName(itemNameInput.getText().toString());
+            globals.getCurrentItem().setBrand(itemBrandInput.getText().toString());
+            globals.getCurrentItem().setRecNumber(Integer.parseInt(itemRecInput.getText().toString()));
+
+            getFragmentManager().beginTransaction().replace(R.id.fragment_container,
+                    new ScanFragment(), "scan_fragment").commit();
+
+            // adds the current item into the database, with the used added recycling number.
+            globals.getDatabase().addItem();
+            Toast.makeText(getActivity(), "Thank you for helping!", Toast.LENGTH_SHORT).show();
+        }
+        // a user has input a non-valid recycling number, show a toast text explaining this
+        else
+        {
+            Toast.makeText(getActivity(), "That number is not a valid recycling number", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    // this method checks that the recycling number input was correct
+    // range: 1 - 8
+    public boolean checkItemDetails(String checkString) {
+
+        int inputInt = 0;
+        Boolean valid = false;
+
+        try {
+            inputInt = Integer.parseInt(checkString);
+
+        }catch(Exception e)
+        {
+            inputInt = 0;
+        }
+
+        if(inputInt > 0 && inputInt < 9)
+        {
+            valid = true;
+        }
+
+        return valid;
     }
 }
