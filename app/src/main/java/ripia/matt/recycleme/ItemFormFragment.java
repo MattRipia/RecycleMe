@@ -94,14 +94,12 @@ public class ItemFormFragment extends Fragment implements View.OnClickListener{
     // range: 1 - 8
     private boolean checkItemDetails(String checkString) {
 
-        // takes the passed string and gets the first character
-        String inputString = checkString.substring(0, 1);
         int inputInt = 0;
         Boolean valid = false;
 
         // turns the 1 character string into an integer to be checked
         try {
-            inputInt = Integer.parseInt(inputString);
+            inputInt = Integer.parseInt(checkString);
 
         }catch(Exception e)
         {
