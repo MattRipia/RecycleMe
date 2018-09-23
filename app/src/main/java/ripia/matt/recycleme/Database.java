@@ -129,6 +129,8 @@ public class Database {
             if(rs.next())
             {
                 itemExists = true;
+                globals.getCurrentItem().setName(rs.getString(2));
+                globals.getCurrentItem().setBrand(rs.getString(3));
                 globals.getCurrentItem().setRecNumber(rs.getInt(4));
                 Log.d("checkItemInDatabase", " Item Exists in DB");
             }
@@ -148,9 +150,18 @@ public class Database {
 
     public void addItem() {
 
+//        Log.d("DB", "item barcode: " + globals.getCurrentItem().getBarcode());
+//        Log.d("DB", "item name: " + globals.getCurrentItem().getName());
+//        Log.d("DB", "item brand: " + globals.getCurrentItem().getBrand());
+//        Log.d("DB", "item rec #: " + globals.getCurrentItem().getRecNumber());
+
         String insertItem = "insert into item values('"
-        + globals.getCurrentItem().getBarcode() + "',' ',' ',"
+        + globals.getCurrentItem().getBarcode() + "','"
+        + globals.getCurrentItem().getName() + "','"
+        + globals.getCurrentItem().getBrand() + "',"
         + globals.getCurrentItem().getRecNumber()+ ")";
+//        + globals.getCurrentItem().getBarcode() + "',' ',' ',"
+//        + globals.getCurrentItem().getRecNumber()+ ")";
 
         try {
             statement.executeUpdate(insertItem);

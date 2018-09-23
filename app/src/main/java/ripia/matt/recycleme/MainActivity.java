@@ -140,12 +140,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
                             new ItemFormFragment(),"get_recycling_number_fragment").commit();
 
-                    // if the recycling number is between 1 and 8 add this item to the database
-                    if(globals.getCurrentItem().getRecNumber() > 0 && globals.getCurrentItem().getRecNumber() < 9 )
-                    {
-                        globals.getDatabase().addItem();
-                        Toast.makeText(this, "Item added to DB", Toast.LENGTH_SHORT).show();
-                    }
+//                    // if the recycling number is between 1 and 8 add this item to the database
+//                    if(globals.getCurrentItem().getRecNumber() > 0 && globals.getCurrentItem().getRecNumber() < 9 )
+//                    {
+//                        globals.getDatabase().addItem();
+//                        Toast.makeText(this, "Item added to DB", Toast.LENGTH_SHORT).show();
+//                    }
                 }
 
             }
