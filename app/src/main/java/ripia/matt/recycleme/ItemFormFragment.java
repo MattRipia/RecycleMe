@@ -92,19 +92,17 @@ public class ItemFormFragment extends Fragment implements View.OnClickListener{
 
     // this method checks that the recycling number input was correct
     // range: 1 - 8
-    private boolean checkItemDetails(String checkString) {
+    public boolean checkItemDetails(String checkString) {
 
         int inputInt = 0;
         Boolean valid = false;
 
-        // turns the 1 character string into an integer to be checked
         try {
             inputInt = Integer.parseInt(checkString);
 
         }catch(Exception e)
         {
             inputInt = 0;
-            Log.d("check item details", " error - " +  e.getMessage());
         }
 
         if(inputInt > 0 && inputInt < 9)
