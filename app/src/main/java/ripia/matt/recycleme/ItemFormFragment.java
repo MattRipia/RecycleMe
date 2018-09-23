@@ -55,25 +55,7 @@ public class ItemFormFragment extends Fragment implements View.OnClickListener{
         switch (view.getId()) {
             case R.id.accept_button:
 
-                // a user has input a valid recycling number, save this number into the currentItem and update the record in the database
-                if(Integer.parseInt(itemRecInput.getText().toString()) > 0 && Integer.parseInt(itemRecInput.getText().toString()) < 9)
-                {
-                    globals.getCurrentItem().setName(itemNameInput.getText().toString());
-                    globals.getCurrentItem().setBrand(itemBrandInput.getText().toString());
-
-                    globals.getCurrentItem().setRecNumber(Integer.parseInt(itemRecInput.getText().toString()));
-                    getFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                            new ScanFragment(), "scan_fragment").commit();
-
-                    // adds the current item into the database, with the used added recycling number.
-                    globals.getDatabase().addItem();
-                    Toast.makeText(getActivity(), "Thank you for helping!", Toast.LENGTH_SHORT).show();
-                }
-                // a user has input a non-valid recycling number, show a toast text explaining this
-                else
-                {
-                    Toast.makeText(getActivity(), "That number is not a valid recycling number", Toast.LENGTH_SHORT).show();
-                }
+                updateItemDetails();
                 break;
 
             case R.id.cancel_button:
@@ -82,5 +64,52 @@ public class ItemFormFragment extends Fragment implements View.OnClickListener{
                         new ScanFragment(), "scan_fragment").commit();
                 break;
         }
+    }
+
+    public void updateItemDetails(){
+
+        Boolean validNumber = false;
+        validNumber = checkItemDetails(itemRecInput.getText().toString());
+
+        // if the user input a valid number, add this into the database and move to the scan screen with the updated currentItem
+        if(validNumber)
+        {
+            globals.getCurrentItem().setName(itemNameInput.getText().toString());
+            globals.getCurrentItem().setBrand(itemBrandInput.getText().toString());
+
+            globals.getCurrentItem().setRecNumber(Integer.parseInt(itemRecInput.getText().toString()));
+            getFragmentManager().beginTransaction().replace(R.id.fragment_container,
+                    new ScanFragment(), "scan_fragment").commit();
+
+            // adds the current item into the database, with the used added recycling number.
+            globals.getDatabase().addItem();
+            Toast.makeText(getActivity(), "Thank you for helping!", Toast.LENGTH_SHORT).show();
+        }
+        // a user has input a non-valid recycling number, show a toast text explaining this
+        else
+        {
+            Toast.makeText(getActivity(), "That number is not a valid recycling number", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    public Boolean checkItemDetails(String checkString) {
+
+        int inputInt = 0;
+        Boolean valid = false;
+
+        try{
+            inputInt = Integer.parseInt(checkString);
+
+        } catch(Exception e)
+        {
+            inputInt = 0;
+        }
+
+        if(inputInt > 0 && inputInt < 9)
+        {
+            valid = true;
+        }
+
+        return valid;
     }
 }
