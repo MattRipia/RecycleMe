@@ -3,7 +3,7 @@ This is the repository for the RecycleMe Android Application created by:
 Matt Ripia
 Jaime King
 Zihan Rasheed
-Reuben White1
+Reuben White
 
 Of Auckland University of Technology
 
