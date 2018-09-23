@@ -149,11 +149,11 @@ public class Database {
     }
 
     public void addItem() {
-        Log.d("DB", "item barcode: " + globals.getCurrentItem().getBarcode());
-        Log.d("DB", "item name: " + globals.getCurrentItem().getName());
-        Log.d("DB", "item brand: " + globals.getCurrentItem().getBrand());
-        Log.d("DB", "item rec #: " + globals.getCurrentItem().getRecNumber());
 
+//        Log.d("DB", "item barcode: " + globals.getCurrentItem().getBarcode());
+//        Log.d("DB", "item name: " + globals.getCurrentItem().getName());
+//        Log.d("DB", "item brand: " + globals.getCurrentItem().getBrand());
+//        Log.d("DB", "item rec #: " + globals.getCurrentItem().getRecNumber());
 
         String insertItem = "insert into item values('"
         + globals.getCurrentItem().getBarcode() + "','"
