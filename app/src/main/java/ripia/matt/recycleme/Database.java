@@ -150,18 +150,11 @@ public class Database {
 
     public void addItem() {
 
-//        Log.d("DB", "item barcode: " + globals.getCurrentItem().getBarcode());
-//        Log.d("DB", "item name: " + globals.getCurrentItem().getName());
-//        Log.d("DB", "item brand: " + globals.getCurrentItem().getBrand());
-//        Log.d("DB", "item rec #: " + globals.getCurrentItem().getRecNumber());
-
         String insertItem = "insert into item values('"
         + globals.getCurrentItem().getBarcode() + "','"
         + globals.getCurrentItem().getName() + "','"
         + globals.getCurrentItem().getBrand() + "',"
         + globals.getCurrentItem().getRecNumber()+ ")";
-//        + globals.getCurrentItem().getBarcode() + "',' ',' ',"
-//        + globals.getCurrentItem().getRecNumber()+ ")";
 
         try {
             statement.executeUpdate(insertItem);
@@ -173,13 +166,13 @@ public class Database {
         Log.d("addItem", " New item inserted");
     }
 
+    // updates the user in the database with their address and updated points
     public void updateDatabase(){
 
-        try {
             String updateUser = "update account set points = " + globals.getCurrentUser().getPoints()
                                               + ", address = '" + globals.getCurrentUser().getAddress()
                                               + "' where uniqueid = '" + globals.getCurrentUser().getUniqueID() + "'";
-
+        try {
             statement.executeUpdate(updateUser);
             Log.d("updateDatabase", " user updated");
 
