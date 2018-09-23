@@ -180,7 +180,6 @@ public class Database {
                                               + ", address = '" + globals.getCurrentUser().getAddress()
                                               + "' where uniqueid = '" + globals.getCurrentUser().getUniqueID() + "'";
 
-
             statement.executeUpdate(updateUser);
             Log.d("updateDatabase", " user updated");
 
