@@ -104,10 +104,73 @@ public class AccountFragment extends Fragment implements View.OnClickListener{
             String streetName = addresses.get(0).getThoroughfare();
             String postCode = addresses.get(0).getPostalCode();
 
-            globals.getCurrentUser().setAddress(streetNo + " "  + streetName + ", "  + postCode);
+            // checks the strings above and ensures that an address is returned correctly
+            boolean validAddress = checkLocationDetails(streetNo, streetName, postCode);
+
+            // if an address is valid, add this to the current users address
+            if(validAddress)
+            {
+                globals.getCurrentUser().setAddress(streetNo + " "  + streetName + ", "  + postCode);
+            }
+            else
+            {
+                Toast.makeText(getContext(),"Invalid address, unable to update", Toast.LENGTH_LONG).show();
+                Log.d("Location Error", "bad address " + streetNo + ", " + streetName + ", "  + postCode);
+            }
 
         } catch (Exception e) {
             Log.d("getCurrentLocation", "error -" + e.getMessage());
+        }
+    }
+
+    // This method ensures that the location received from 'GetCurrentLocation' is formatted
+    // correctly with no null values or repeating variables, as in some cases 'NULL' is
+    // returned or the postal code is the same as the street number which is incorrect.
+    public boolean checkLocationDetails(String streetNo, String streetName, String postCode) {
+
+        try{
+            boolean validAddress = true;
+            int intPostCode;
+
+            // duplicated variables
+            if (streetNo.equals(postCode) || streetNo.equals(streetName) || streetName.equals(postCode)) {
+                validAddress = false;
+                return validAddress;
+            }
+
+            // empty variables
+            if (streetNo.isEmpty() || streetName.isEmpty() || postCode.isEmpty() || streetNo.equals(" ") || streetName.equals(" ") || postCode.equals(" ")) {
+                validAddress = false;
+                return validAddress;
+            }
+
+            // null variables
+            if (streetNo.equals("null") || streetName.equals("null") || postCode.equals("null")) {
+                validAddress = false;
+                return validAddress;
+            }
+
+            // post code isn't a number / Exception gets caught
+            try {
+                intPostCode = Integer.parseInt(postCode);
+
+            } catch (Exception e) {
+                validAddress = false;
+                return validAddress;
+            }
+
+            // post code isnt 4 characters
+            if (postCode.length() != 4) {
+                validAddress = false;
+                return validAddress;
+            }
+
+            return validAddress;
+
+        // if any null values get parsed into the method, catch these and return false
+        }catch(NullPointerException e)
+        {
+            return false;
         }
     }
 

@@ -12,6 +12,35 @@ import org.junit.Test;
 public class UnitTest {
 
     @Test
+    // This method ensures that the location received from 'GetCurrentLocation' is formatted
+    // correctly with no null values or repeating variables, as in some cases 'NULL' is
+    // returned or the postal code is the same as the street number which is incorrect.
+    public void checkLocationDetails(){
+
+        AccountFragment account = new AccountFragment();
+
+        Assert.assertEquals("Checking location details are correct", true, account.checkLocationDetails("12", "Bing Street", "0600"));
+        Assert.assertEquals("Checking location details are correct", true, account.checkLocationDetails("1065", "Tts not real Street", "2100"));
+        Assert.assertEquals("Checking location details are correct", true, account.checkLocationDetails("122", "Actual Ave", "0110"));
+        Assert.assertEquals("Checking location details are correct", true, account.checkLocationDetails("1", "Fake Street", "0600"));
+
+        Assert.assertEquals("Checking post code is a number", false, account.checkLocationDetails("1024", "Megabyte Lane", "not a number"));
+        Assert.assertEquals("Checking duplicated variables", false, account.checkLocationDetails("12", "1010", "1010"));
+        Assert.assertEquals("Checking duplicated variables", false, account.checkLocationDetails("1010", "1010", "2001"));
+        Assert.assertEquals("Checking duplicated variables", false, account.checkLocationDetails("1010", "Some Street", "1010"));
+        Assert.assertEquals("Checking empty strings", false, account.checkLocationDetails("", "", ""));
+        Assert.assertEquals("Checking spaces with no other text", false, account.checkLocationDetails(" ", " ", " "));
+        Assert.assertEquals("Checking no null variables", false, account.checkLocationDetails("null", "Hello Ave", "0600"));
+        Assert.assertEquals("Checking no null variables", false, account.checkLocationDetails("1065", "null", "9911"));
+        Assert.assertEquals("Checking no null variables", false, account.checkLocationDetails("122", "Account Road", "null"));
+        Assert.assertEquals("Checking no null variables", false, account.checkLocationDetails("null", "null", "null"));
+        Assert.assertEquals("Checking no null values", false, account.checkLocationDetails(null, null, null));
+        Assert.assertEquals("Checking no null values", false, account.checkLocationDetails(null, "A Street", "2115"));
+        Assert.assertEquals("Checking no null values", false, account.checkLocationDetails("18", null, "200"));
+        Assert.assertEquals("Checking no null values", false, account.checkLocationDetails("18", "A Street", null));
+    }
+
+    @Test
     // this unit test tests the boundaries of a valid number.
     // We want the values 1 - 8 to return true, everything else must return false.
     public void checkItemDetails() {
