@@ -1,5 +1,10 @@
 package ripia.matt.recycleme;
 
+/**
+ *  The item class which holds the details of a current item.
+ *
+ * */
+
 public class Item {
 
     private String name, barcode, brand;

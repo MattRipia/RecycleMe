@@ -1,12 +1,14 @@
 package ripia.matt.recycleme;
 
-import com.google.firebase.auth.FirebaseUser;
+/**
+ *  The user class which is used to maintain a currentUser
+ *
+ * */
 
 public class User {
 
     private String uniqueID, name, address;
     private int points;
-
 
     public User() {
         this.name = "";

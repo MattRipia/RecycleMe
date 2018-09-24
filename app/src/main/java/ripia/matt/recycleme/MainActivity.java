@@ -12,12 +12,16 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.MenuItem;
 import android.widget.Toast;
-
 import com.facebook.login.LoginManager;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
 
+/**
+ *  The main activity is the underlying code for where the other fragments sit, it sets the
+ *  side validation bar which is used to navigate through the other fragments.
+ *
+ * */
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
 
     private DrawerLayout drawer;
@@ -128,16 +132,15 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 // if an item exists in the database -> grab that item now then update the currentItem with the recycling number
                 if(itemExists)
                 {
-                    // the item exists in the database update the UI now
+                    // the item exists in the database, update the UI now
                     // Re initializing the scan fragment to update the result field
                     getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new ScanFragment(),"scan_fragment").commit();
                     Toast.makeText(this, "Scan success", Toast.LENGTH_SHORT).show();
                 }
-                // if an item doesnt exist in the database, ask the user for a recycling number
+                // if an item doesnt exist in the database, ask the user for a recycling number by opening the ItemFormFragment
                 else
                 {
-                    getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                            new ItemFormFragment(),"get_recycling_number_fragment").commit();
+                    getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new ItemFormFragment(),"get_recycling_number_fragment").commit();
                 }
             }
             else
@@ -176,7 +179,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         }
     }
 
-    // syncs the current user to the backend database
+    // syncs the current user to the backend database when the user clicks the back button
     @Override
     public void finish()
     {

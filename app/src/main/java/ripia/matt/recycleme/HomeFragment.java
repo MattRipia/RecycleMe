@@ -9,6 +9,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+/**
+ * This fragment is used to show the home screen to the user.
+ *
+ */
+
 public class HomeFragment extends Fragment {
 
     private Globals globals;

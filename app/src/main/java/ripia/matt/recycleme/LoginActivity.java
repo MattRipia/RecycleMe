@@ -32,6 +32,13 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
 
+/**
+ * This activity is used to login to our application. It uses a centralised firebase authentication service
+ * which users can sign in with google, facebook or as a guest. Using a central firebase service allows us to
+ * give each user a uniqueID which can then be used to track a user's points and address.
+ *
+ **/
+
 public class LoginActivity extends AppCompatActivity implements GoogleApiClient.OnConnectionFailedListener, View.OnClickListener {
 
     // Variables for logging in and databases
@@ -85,7 +92,7 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
     }
 
     @Override
-    //checks if a user is already logged in, if they are, then updates the UI to the camera screen
+    //checks if a user is already logged in, if they are, then updates the UI
     protected void onStart() {
         super.onStart();
         FirebaseUser currentUser = firebaseAuth.getCurrentUser();
@@ -137,9 +144,11 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
         startActivityForResult(signIntent, GOOGLE_ID);
     }
 
-    // the user wants to sign in with facebook, sets the facebook permissions and starts a new activity
-    // onActivityResult is called when onSuccess is hit, meaning a user has logged into facebook successfully
-    // the facebook access token is then handled
+    /*
+     *  the user wants to sign in with facebook, sets the facebook permissions and starts a new activity
+     *  onActivityResult is called when onSuccess is hit, meaning a user has logged into facebook successfully
+     *  the facebook access token is then handled
+     */
     private void facebookLogin() {
 
         callbackManager = CallbackManager.Factory.create();
@@ -179,10 +188,13 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
 
-                if (task.isSuccessful()) {
+                if (task.isSuccessful())
+                {
                     FirebaseUser aUser = firebaseAuth.getCurrentUser();
                     updateUI(aUser);
-                } else {
+                }
+                else
+                {
                     Toast.makeText(getApplicationContext(), "Authentication failed.", Toast.LENGTH_LONG).show();
                 }
             }
@@ -202,7 +214,8 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
         super.onActivityResult(requestCode, resultCode, data);
 
         // the activity that just completed was a google activity
-        if (requestCode == GOOGLE_ID) {
+        if (requestCode == GOOGLE_ID)
+        {
             Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
 
             try {
@@ -217,7 +230,8 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
             }
         }
         // the activity that just completed was a facebook activity
-        else if (requestCode == FACEBOOK_ID) {
+        else if (requestCode == FACEBOOK_ID)
+        {
             callbackManager.onActivityResult(requestCode, resultCode, data);
         }
     }
@@ -229,13 +243,13 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
         firebaseAuth.signInWithCredential(credential).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
-                if (task.isSuccessful()) {
-
+                if (task.isSuccessful())
+                {
                     // Sign in success, update UI with the signed-in user's information
                     FirebaseUser user = firebaseAuth.getCurrentUser();
                     updateUI(user);
-                } else {
-
+                } else
+                {
                     // If sign in fails, display a message to the user.
                     updateUI(firebaseAuth.getCurrentUser());
                     Toast.makeText(getApplicationContext(), "firebase auth with google - failed!", Toast.LENGTH_LONG).show();

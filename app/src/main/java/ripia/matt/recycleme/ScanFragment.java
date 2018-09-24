@@ -9,11 +9,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
-
 import com.google.zxing.integration.android.IntentIntegrator;
 
 public class ScanFragment extends Fragment implements View.OnClickListener{
-
 
     private Button scanButton;
     private TextView itemName, itemBrand, itemBarcode, itemRecNumber;

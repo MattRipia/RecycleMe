@@ -7,6 +7,13 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import com.google.firebase.auth.FirebaseAuth;
 
+/**
+ *  The splash activity it is the first activity when the app runs and is used to
+ *  check if a user is already logged in. If a user is already logged in, then we can skip the
+ *  login activity and go straight to the MainActivity.
+ *
+ * */
+
 public class SplashActivity extends AppCompatActivity {
 
     @Override

@@ -31,7 +31,6 @@ public class AccountFragment extends Fragment implements View.OnClickListener{
 
     private Button zoneButton, addressButton;
     private TextView profileText;
-
     private LocationManager locationManager;
     private double latitude, longitude;
     private Globals globals;
@@ -92,7 +91,8 @@ public class AccountFragment extends Fragment implements View.OnClickListener{
         }
     }
 
-    // sets the current location of 'currentuser'
+    // sets the current location of 'currentuser' when the user clicks the 'get location' button,
+    // this location is used when checking the recycling zone of that user.
     private void getCurrentLocation() {
 
         Geocoder geocoder = new Geocoder(getActivity(), Locale.getDefault());
@@ -114,6 +114,7 @@ public class AccountFragment extends Fragment implements View.OnClickListener{
             }
             else
             {
+                // a valid address was not found, create a log and toast message
                 Toast.makeText(getContext(),"Invalid address, unable to update", Toast.LENGTH_LONG).show();
                 Log.d("Location Error", "bad address " + streetNo + ", " + streetName + ", "  + postCode);
             }
@@ -193,7 +194,6 @@ public class AccountFragment extends Fragment implements View.OnClickListener{
             // if the gps locator found a current location, then set the co-ordinates
             // this method tries to get the gps coordinates in 3 different ways
             // if none of these ways produces a latitude or longitude then a toast message is shown.
-
             if (gpsLocation != null)
             {
                 latitude = gpsLocation.getLatitude();
