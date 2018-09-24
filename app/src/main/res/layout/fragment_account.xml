@@ -8,10 +8,9 @@
         android:id="@+id/logo"
         android:layout_width="181dp"
         android:layout_height="84dp"
-        android:layout_marginBottom="11dp"
-        android:layout_marginLeft="5dp"
-        android:layout_marginRight="5dp"
-        android:layout_marginTop="50dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignStart="@+id/profile_text"
+        android:layout_marginTop="13dp"
         android:src="@drawable/rmlogowhite" />
 
     <TextView
