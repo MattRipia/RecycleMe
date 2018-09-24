@@ -57,8 +57,7 @@ public class ScanFragment extends Fragment implements View.OnClickListener{
 
     // starts the scanner app and returns an item
     private void startScan() {
-        //Start Scanning
-        //TODO this does not work as this is a fragment not an activity
+
         IntentIntegrator scanIntegrator = new IntentIntegrator(getActivity());
         scanIntegrator.initiateScan();
     }

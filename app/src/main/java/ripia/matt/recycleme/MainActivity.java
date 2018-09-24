@@ -25,7 +25,7 @@ import com.google.zxing.integration.android.IntentResult;
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
 
     private DrawerLayout drawer;
-    NavigationView navigationView;
+    private NavigationView navigationView;
     private static final int SCAN_ID = 49374;
     private Globals globals;
 
@@ -67,16 +67,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         switch (item.getItemId()) {
             case R.id.nav_home:
-                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                        new HomeFragment(), "home_fragment").commit();
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new HomeFragment(), "home_fragment").commit();
                 break;
             case R.id.nav_scan:
-                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                        new ScanFragment(),"scan_fragment").commit();
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new ScanFragment(),"scan_fragment").commit();
                 break;
             case R.id.nav_account:
-                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                        new AccountFragment(),"account_fragment").commit();
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new AccountFragment(),"account_fragment").commit();
                 break;
             case R.id.nav_log_out:
                 Toast.makeText(this, "Log Out", Toast.LENGTH_SHORT).show();
@@ -95,13 +92,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 Toast.makeText(this, "About Us - Coming Soon", Toast.LENGTH_SHORT).show();
                 break;
         }
+
         //closes the drawer once selection has been processed
         drawer.closeDrawer(GravityCompat.START);
-
         return true;
     }
 
     @Override
+    // closes the navigation draw if its open
     public void onBackPressed() {
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);

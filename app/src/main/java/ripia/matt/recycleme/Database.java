@@ -57,7 +57,7 @@ public class Database {
     }
 
     // closes that database connection
-    public void closeDB() {
+    protected void closeDB() {
         try {
             conn.close();
             statement.close();
@@ -69,7 +69,7 @@ public class Database {
 
     // when a user logs in, this method checks the user against the backend database, if a user exists
     // then their details are pulled. This is done through the use of a uniqueid given to each user.
-    public User createCurrentUser(FirebaseUser firebaseUser){
+    protected User createCurrentUser(FirebaseUser firebaseUser){
 
         ResultSet rs;
         User currentUser= new User();
@@ -113,7 +113,7 @@ public class Database {
     // checks to see if the item scanned is in the database already.
     // returns true if an item exists and sets the current items details
     // from the returned resultSet.
-    public Boolean checkItemInDatabase(Item item){
+    protected Boolean checkItemInDatabase(Item item){
 
         ResultSet rs;
         String queryItem = "select * from item where barcode = '" + item.getBarcode() + "'";
@@ -147,7 +147,7 @@ public class Database {
     }
 
     // an item is added to the database from the currentItem variable
-    public void addItem() {
+    protected void addItem() {
 
         String insertItem = "insert into item values('"
         + globals.getCurrentItem().getBarcode() + "','"
@@ -166,7 +166,7 @@ public class Database {
     }
 
     // updates the user in the database with their address and updated points
-    public void updateDatabase(){
+    protected void updateDatabase(){
 
         String updateUser = "update account set points = " + globals.getCurrentUser().getPoints()
                                           + ", address = '" + globals.getCurrentUser().getAddress()
