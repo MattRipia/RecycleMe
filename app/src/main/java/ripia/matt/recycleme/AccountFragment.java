@@ -131,17 +131,18 @@ public class AccountFragment extends Fragment implements View.OnClickListener{
             // if the gps locator found a current location, then set the co-ordinates
             // this method tries to get the gps coordinates in 3 different ways
             // if none of these ways produces a latitude or longitude then a toast message is shown.
-            if (networkLocation != null)
-            {
-                latitude = networkLocation.getLatitude();
-                longitude = networkLocation.getLongitude();
-                Log.d("networkLocation used", " ");
-            }
-            else  if (gpsLocation != null)
+            
+            if (gpsLocation != null)
             {
                 latitude = gpsLocation.getLatitude();
                 longitude = gpsLocation.getLongitude();
                 Log.d("gpsLocation used", " ");
+            }
+            else if (networkLocation != null)
+            {
+                latitude = networkLocation.getLatitude();
+                longitude = networkLocation.getLongitude();
+                Log.d("networkLocation used", " ");
             }
             else  if (providerLocation != null)
             {
