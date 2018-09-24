@@ -71,7 +71,7 @@ public class AccountFragment extends Fragment implements View.OnClickListener{
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.zone_button:
-                Toast.makeText(getActivity(), "Zone Button Hit!", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(), "Zone - Coming Soon", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.address_button:
                 Toast.makeText(getActivity(), "Location Button Hit!", Toast.LENGTH_SHORT).show();
