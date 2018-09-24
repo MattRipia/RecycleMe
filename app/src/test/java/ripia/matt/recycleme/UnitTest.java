@@ -24,6 +24,7 @@ public class UnitTest {
         Assert.assertEquals("Checking location details are correct", true, account.checkLocationDetails("122", "Actual Ave", "0110"));
         Assert.assertEquals("Checking location details are correct", true, account.checkLocationDetails("1", "Fake Street", "0600"));
 
+        Assert.assertEquals("Checking post code is a number", false, account.checkLocationDetails("1024", "Megabyte Lane", "55555"));
         Assert.assertEquals("Checking post code is a number", false, account.checkLocationDetails("1024", "Megabyte Lane", "not a number"));
         Assert.assertEquals("Checking duplicated variables", false, account.checkLocationDetails("12", "1010", "1010"));
         Assert.assertEquals("Checking duplicated variables", false, account.checkLocationDetails("1010", "1010", "2001"));
