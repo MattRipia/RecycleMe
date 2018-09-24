@@ -124,9 +124,11 @@ public class AccountFragment extends Fragment implements View.OnClickListener{
         }
     }
 
-    // This method ensures that the location received from 'GetCurrentLocation' is formatted
-    // correctly with no null values or repeating variables, as in some cases 'NULL' is
-    // returned or the postal code is the same as the street number which is incorrect.
+    /* This method ensures that the location received from 'GetCurrentLocation' is formatted
+    *  correctly with no null values or repeating variables, as in some cases 'NULL' is
+    *  returned or the postal code is the same as the street number which is incorrect.
+    *  This method needs to be public for testing purposes, need to be changed on release.
+    */
     public boolean checkLocationDetails(String streetNo, String streetName, String postCode) {
 
         try{
@@ -221,7 +223,7 @@ public class AccountFragment extends Fragment implements View.OnClickListener{
     }
 
     // shows an alert if a gps location cannot be obtained
-    protected void buildAlertMessageNoGps() {
+    private void buildAlertMessageNoGps() {
 
         final AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         builder.setMessage("Please Turn ON your GPS Connection")

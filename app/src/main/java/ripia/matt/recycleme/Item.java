@@ -49,5 +49,4 @@ public class Item {
     public void setRecNumber(int recyclingNumber) {
         this.recNumber = recyclingNumber;
     }
-
 }

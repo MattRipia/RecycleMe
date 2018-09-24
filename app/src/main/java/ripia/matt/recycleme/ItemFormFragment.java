@@ -68,7 +68,7 @@ public class ItemFormFragment extends Fragment implements View.OnClickListener{
         }
     }
 
-    public void updateItemDetails(){
+    private void updateItemDetails(){
 
         Boolean validNumber = false;
         validNumber = checkItemDetails(itemRecInput.getText().toString());
@@ -94,7 +94,7 @@ public class ItemFormFragment extends Fragment implements View.OnClickListener{
         }
     }
 
-    public Boolean checkItemDetails(String checkString) {
+    private Boolean checkItemDetails(String checkString) {
 
         int inputInt = 0;
         Boolean valid = false;
