@@ -79,16 +79,16 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 logout();
                 break;
             case R.id.nav_notifications:
-                Toast.makeText(this, "Notifications", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "Notifications - Coming Soon", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.nav_share:
-                Toast.makeText(this, "Share", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "Share - Coming Soon", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.nav_contact_us:
-                Toast.makeText(this, "Contact Us", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "Contact Us - Coming Soon", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.nav_about:
-                Toast.makeText(this, "About Us", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "About Us - Coming Soon", Toast.LENGTH_SHORT).show();
                 break;
         }
         //closes the drawer once selection has been processed
