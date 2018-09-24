@@ -15,23 +15,7 @@
       },
       "oauth_client": [
         {
-          "client_id": "447863665017-3bkekodfb7amb9op2ntc35j6rqcbt8kv.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "ripia.matt.recycleme",
-            "certificate_hash": "5e4d575392956a6b25a2106d072769c2eba73de4"
-          }
-        },
-        {
-          "client_id": "447863665017-gl4dkav97p6mpisn20m8r6ft87dstl78.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "ripia.matt.recycleme",
-            "certificate_hash": "24b30836caf3c2a6558cd80c9dfbb2996df9faf1"
-          }
-        },
-        {
-          "client_id": "447863665017-1ha5759r4eo2vh1ui2t8utcb9s6942i0.apps.googleusercontent.com",
+          "client_id": "447863665017-cahej74s9pgjmd82ch1a9c7o4bad6v71.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "ripia.matt.recycleme",
@@ -39,15 +23,7 @@
           }
         },
         {
-          "client_id": "447863665017-6h59iocnrq6qs165v6at1a6mmm5a7i1n.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "ripia.matt.recycleme",
-            "certificate_hash": "abe1fb8da43b0cb24f4572d7057c2ff1bfb1f1fc"
-          }
-        },
-        {
-          "client_id": "447863665017-ui7g3k9ueunsp578cfqdv34q36l0pv6c.apps.googleusercontent.com",
+          "client_id": "447863665017-d5ajtcvrs13huldi929i4ij1k01dm5n4.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
@@ -64,7 +40,7 @@
           "status": 2,
           "other_platform_oauth_client": [
             {
-              "client_id": "447863665017-ui7g3k9ueunsp578cfqdv34q36l0pv6c.apps.googleusercontent.com",
+              "client_id": "447863665017-d5ajtcvrs13huldi929i4ij1k01dm5n4.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

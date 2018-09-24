@@ -2,7 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@android:color/background_light">
+    android:background="@drawable/bgforest">
 
 
     <Button
@@ -16,9 +16,10 @@
         android:id="@+id/last_scanned_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
         android:layout_above="@+id/last_scanned_item"
+        android:layout_centerHorizontal="true"
         android:text="Last Scanned Item"
+        android:textColor="@android:color/white"
         android:textSize="30sp" />
 
     <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -27,7 +28,7 @@
         android:layout_height="80dp"
         android:layout_alignParentBottom="true"
         android:layout_marginBottom="20dp"
-        android:background="@android:color/darker_gray"
+        android:background="#c8aaaaaa"
         android:gravity="center_vertical"
         android:orientation="vertical"
         android:padding="10dp"
@@ -38,7 +39,7 @@
             android:layout_width="60dp"
             android:layout_height="60dp"
             android:layout_marginRight="10dp"
-            android:background="@android:color/background_light"
+            android:background="#c8ffffff"
             android:textAlignment="center"
             android:textColor="@android:color/black"
             android:textSize="45sp" />
@@ -55,14 +56,14 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/item_name"
-            android:layout_toRightOf="@+id/item_rec_number"/>
+            android:layout_toRightOf="@+id/item_rec_number" />
 
         <TextView
             android:id="@+id/item_barcode"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/item_brand"
-            android:layout_toRightOf="@+id/item_rec_number"/>
+            android:layout_toRightOf="@+id/item_rec_number" />
     </RelativeLayout>
 
 </RelativeLayout>
