@@ -67,7 +67,6 @@ public class AccountFragment extends Fragment implements View.OnClickListener{
                 + "Last Scanned - " + globals.getCurrentItem().getBarcode());
     }
 
-
     @Override
     public void onClick(View view) {
         switch (view.getId()) {

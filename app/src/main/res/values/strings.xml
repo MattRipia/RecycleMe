@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">RecycleMe</string>
     <string name="sub_title">A Team MARJ Project</string>
+    <string name="welcome_text">Welcome to RecycleMe, \nOpen the side menu to explore!!</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
 
