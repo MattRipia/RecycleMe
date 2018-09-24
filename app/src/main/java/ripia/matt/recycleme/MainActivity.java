@@ -119,7 +119,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
             //successful scan, create a new item object to hold the barcode, then query the db to see if this exists
             // if an item exists, the recycling number is taken, if not then the user is asked to input this
-            if (scanningResult != null)
+            if (scanningResult.getContents() != null)
             {
                 globals.getCurrentItem().setBarcode(scanningResult.getContents());
                 globals.getCurrentUser().setPoints(globals.getCurrentUser().getPoints() + 10);
