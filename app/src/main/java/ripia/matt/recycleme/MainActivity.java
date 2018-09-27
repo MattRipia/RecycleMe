@@ -1,9 +1,11 @@
 package ripia.matt.recycleme;
 
+import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
+import android.support.v4.app.Fragment;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -70,10 +72,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new HomeFragment(), "home_fragment").commit();
                 break;
             case R.id.nav_scan:
-                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new ScanFragment(),"scan_fragment").commit();
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new ScanFragment(),"scan_fragment").addToBackStack("scan nav").commit();
                 break;
             case R.id.nav_account:
-                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new AccountFragment(),"account_fragment").commit();
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new AccountFragment(),"account_fragment").addToBackStack("account nav").commit();
                 break;
             case R.id.nav_log_out:
                 Toast.makeText(this, "Log Out", Toast.LENGTH_SHORT).show();
@@ -101,10 +103,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     @Override
     // closes the navigation draw if its open
     public void onBackPressed() {
-        if (drawer.isDrawerOpen(GravityCompat.START)) {
+        if (drawer.isDrawerOpen(GravityCompat.START))
+        {
             drawer.closeDrawer(GravityCompat.START);
         }
-        else {
+        else
+        {
             super.onBackPressed();
         }
     }
