@@ -126,9 +126,11 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
         }
     }
 
+    // logs in as a guest using firebase. Because of the response time for a guest login, the thread is halted for 2.5s so that a second press isnt needed.
     private void GuestLogin() {
         try {
             firebaseAuth.signInAnonymously();
+            Thread.currentThread().join(2500);
             FirebaseUser currentUser = firebaseAuth.getCurrentUser();
             updateUI(currentUser);
 
