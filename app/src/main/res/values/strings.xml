@@ -4,7 +4,6 @@
     <string name="welcome_text">Welcome to RecycleMe, \nOpen the side menu to explore!!</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
-
     <string name="location">Location</string>
     <string name="profile">Profile</string>
     <string name="settings">Settings</string>

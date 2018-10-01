@@ -136,6 +136,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 {
                     // the item exists in the database, update the UI now
                     // Re initializing the scan fragment to update the result field
+                    // adds the item to an arraylist of items, to be displayed.
+                    globals.getCurrentUser().addItemToList(globals.getCurrentItem());
                     getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new ScanFragment(),"scan_fragment").commit();
                     Toast.makeText(this, "Scan success", Toast.LENGTH_SHORT).show();
                 }
