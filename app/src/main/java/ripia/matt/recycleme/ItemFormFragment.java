@@ -85,9 +85,10 @@ public class ItemFormFragment extends Fragment implements View.OnClickListener{
 
             // adds the current item into the database, with the used added recycling number.
             globals.getDatabase().addItem();
+            globals.getDatabase().addHistoryItem();
 
             // adds the item to an arraylist of items, to be displayed.
-            globals.getCurrentUser().addItemToList(globals.getCurrentItem());
+            //globals.getCurrentUser().addItemToList(globals.getCurrentItem());
             Toast.makeText(getActivity(), "Thank you for helping!", Toast.LENGTH_SHORT).show();
         }
         // a user has input a non-valid recycling number, show a toast text explaining this

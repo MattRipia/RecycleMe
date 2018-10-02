@@ -10,7 +10,8 @@
         android:textAlignment="center"
         android:text="1"
         android:layout_width="match_parent"
-        android:layout_height="60dp"
+        android:layout_height="75dp"
+        android:textSize="30dp"
         android:id="@+id/list_item_rec"
         android:layout_weight="66.6"/>
 
@@ -21,23 +22,28 @@
         android:layout_weight="33.3">
 
         <TextView
-            android:gravity="center"
+
+            android:layout_marginStart="50dp"
             android:layout_width="match_parent"
             android:layout_height="20dp"
+            android:layout_marginTop="7.5dp"
             android:text="Item"
             android:id="@+id/list_item_name" />
 
         <TextView
-            android:gravity="center"
+            android:layout_marginStart="50dp"
             android:layout_width="match_parent"
             android:layout_height="20dp"
+
             android:text="Brand"
             android:id="@+id/list_item_brand"/>
 
         <TextView
-            android:gravity="center"
+            android:layout_marginStart="50dp"
             android:layout_width="match_parent"
             android:layout_height="20dp"
+
+
             android:text="Barcode"
             android:id="@+id/list_item_barcode"/>
 

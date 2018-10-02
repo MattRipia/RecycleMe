@@ -8,6 +8,10 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.Calendar;
+import java.util.Date;
+
+import javax.xml.transform.Result;
 
 /**
  *  The database class which holds all the connection information to our microsoft sql server. This class is
@@ -157,6 +161,7 @@ public class Database {
 
         try {
             statement.executeUpdate(insertItem);
+            addHistoryItem();
 
         } catch (SQLException e) {
             Log.d("addItem ex", " error - " + e);
@@ -179,6 +184,52 @@ public class Database {
 
             Log.d("updateDatabase", " user update failed - " + e.getMessage());
         }
+    }
+
+    protected void addHistoryItem(){
+
+        Date currentTime = Calendar.getInstance().getTime();
+        String insertItemToHistory = "insert into history values('"
+                + globals.getCurrentUser().getUniqueID() + "','"
+                + globals.getCurrentItem().getBarcode() + "',"
+                + currentTime + ")";
+
+        try {
+            statement.executeUpdate(insertItemToHistory);
+
+        } catch (SQLException e) {
+            Log.d("insertItemToHistory ex", " error - " + e);
+        }
+
+        Log.d("insertItemToHistory", " New item inserted into history table");
+
+    }
+
+    public void syncItemHistory() {
+
+        String queryHistoryTable = "select i.barcode, i.name, i.brand, i.recyclingno from item i, history h where h.uniqueid = '"+ globals.getCurrentUser().getUniqueID() +"' and h.barcode = i.barcode";
+        ResultSet rs;
+
+        try {
+            rs = statement.executeQuery(queryHistoryTable);
+
+            // whiles there is a result, add the row
+            while(rs.next())
+            {
+                Item item = new Item();
+                item.setBarcode(rs.getString(1));
+                item.setName(rs.getString(2));
+                item.setBrand(rs.getString(3));
+                item.setRecNumber(rs.getInt(4));
+
+                globals.getCurrentUser().getItems().add(item);
+            }
+
+        } catch (SQLException e) {
+            Log.d("syncItemHistory ex", " error - " + e);
+        }
+
+        Log.d("syncItemHistory", " syncItemHistory");
     }
 }
 

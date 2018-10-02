@@ -34,26 +34,33 @@ public class ScanFragment extends Fragment implements View.OnClickListener{
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_scan, container, false);
 
-        // populates some junk data for us
-        for(int i = 0; i < 3; i++)
-        {
-            Item item = new Item();
-            item.setName("nice");
-            item.setRecNumber(1);
-            item.setBrand("good brand");
-            item.setBarcode("000000000");
-            globals.getCurrentUser().getItems().add(item);
+//        // populates some junk data for us
+//        for(int i = 0; i < 3; i++)
+//        {
+//            Item item = new Item();
+//            item.setName("nice");
+//            item.setRecNumber(1);
+//            item.setBrand("good brand");
+//            item.setBarcode("000000000");
+//            globals.getCurrentUser().getItems().add(item);
+//
+//            for(int k = 0; k < 3; k++)
+//            {
+//                Item itemInner = new Item();
+//                itemInner.setName("bad");
+//                itemInner.setRecNumber(3);
+//                itemInner.setBrand("bad Brand");
+//                itemInner.setBarcode("666666666");
+//                globals.getCurrentUser().getItems().add(itemInner);
+//            }
+//        }
 
-            for(int k = 0; k < 3; k++)
-            {
-                Item itemInner = new Item();
-                itemInner.setName("bad");
-                itemInner.setRecNumber(3);
-                itemInner.setBrand("bad Brand");
-                itemInner.setBarcode("666666666");
-                globals.getCurrentUser().getItems().add(itemInner);
-            }
-        }
+        // clears the current item in a users history
+        globals.getCurrentUser().getItems().clear();
+
+        // TODO make it so the database only gets updated/synced once the user exits the program, not every time the scan fragment is opened
+        // syncs the view with the database
+        globals.getDatabase().syncItemHistory();
 
         // this adapter is added to the list so we can populate items from this and have a custom layout.
         adapter = new CustomAdapter(getContext(), globals.getCurrentUser().getItems());

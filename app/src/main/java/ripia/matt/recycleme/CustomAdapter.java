@@ -12,8 +12,8 @@ import java.util.ArrayList;
 public class CustomAdapter extends ArrayAdapter<Item> implements View.OnClickListener {
 
     private ArrayList<Item> list;
-    private Context mContext;
     private int lastPosition = -1;
+    //private Context mContext;
 
     private static class ViewHolder{
 
@@ -26,7 +26,7 @@ public class CustomAdapter extends ArrayAdapter<Item> implements View.OnClickLis
     public CustomAdapter(@NonNull Context context, ArrayList<Item> items) {
         super(context, R.layout.adapter_view_layout, items);
         this.list = items;
-        this.mContext = context;
+        //this.mContext = context;
     }
 
     @Override
@@ -55,7 +55,6 @@ public class CustomAdapter extends ArrayAdapter<Item> implements View.OnClickLis
 
             // converts the id's of the text views in the adapter_view_layout to a view holder.
             // We can change the fields using the view holder.
-
             viewHolder.name = convertView.findViewById(R.id.list_item_name);
             viewHolder.barcode = convertView.findViewById(R.id.list_item_barcode);
             viewHolder.brand = convertView.findViewById(R.id.list_item_brand);
@@ -78,17 +77,17 @@ public class CustomAdapter extends ArrayAdapter<Item> implements View.OnClickLis
         // sets the colour of the text based off the recycling number
         if(item.getRecNumber() > 2)
         {
-            viewHolder.name.setTextColor(0xffff0000);
-            viewHolder.brand.setTextColor(0xffff0000);
-            viewHolder.barcode.setTextColor(0xffff0000);
-            viewHolder.recNumber.setTextColor(0xffff0000);
+            viewHolder.name.setTextColor(0xffef7f7f);
+            viewHolder.brand.setTextColor(0xffef7f7f);
+            viewHolder.barcode.setTextColor(0xffef7f7f);
+            viewHolder.recNumber.setTextColor(0xffef7f7f);
         }
         else
         {
-            viewHolder.name.setTextColor(0xff00ff00);
-            viewHolder.brand.setTextColor(0xff00ff00);
-            viewHolder.barcode.setTextColor(0xff00ff00);
-            viewHolder.recNumber.setTextColor(0xff00ff00);
+            viewHolder.name.setTextColor(0xff86f994);
+            viewHolder.brand.setTextColor(0xff86f994);
+            viewHolder.barcode.setTextColor(0xff86f994);
+            viewHolder.recNumber.setTextColor(0xff86f994);
         }
 
         // returns the view
