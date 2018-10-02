@@ -188,11 +188,10 @@ public class Database {
 
     protected void addHistoryItem(){
 
-        Date currentTime = Calendar.getInstance().getTime();
-        String insertItemToHistory = "insert into history values('"
+        //Date currentTime = Calendar.getInstance().getTime();
+        String insertItemToHistory = "insert into history(uniqueid, barcode) values('"
                 + globals.getCurrentUser().getUniqueID() + "','"
-                + globals.getCurrentItem().getBarcode() + "',"
-                + currentTime + ")";
+                + globals.getCurrentItem().getBarcode() + "')";
 
         try {
             statement.executeUpdate(insertItemToHistory);
