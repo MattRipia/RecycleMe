@@ -62,6 +62,12 @@ public class ScanFragment extends Fragment implements View.OnClickListener{
         // syncs the view with the database
         globals.getDatabase().syncItemHistory();
 
+        if(globals.getCurrentItem().getRecNumber() != 0)
+        {
+            globals.getCurrentUser().getItems().remove(globals.getCurrentItem());
+            globals.getCurrentUser().getItems().add(0, globals.getCurrentItem());
+        }
+
         // this adapter is added to the list so we can populate items from this and have a custom layout.
         adapter = new CustomAdapter(getContext(), globals.getCurrentUser().getItems());
 

@@ -186,6 +186,7 @@ public class Database {
         }
     }
 
+    // this method adds an item to the hostory table on the database, this table is a child on the item and account table and keeps a record of a users scan history
     protected void addHistoryItem(){
 
         //Date currentTime = Calendar.getInstance().getTime();
@@ -204,6 +205,7 @@ public class Database {
 
     }
 
+    // this gets the item scan history from the database for an associated user. It then add these to a users items.
     public void syncItemHistory() {
 
         String queryHistoryTable = "select i.barcode, i.name, i.brand, i.recyclingno from item i, history h where h.uniqueid = '"+ globals.getCurrentUser().getUniqueID() +"' and h.barcode = i.barcode";
