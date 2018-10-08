@@ -16,6 +16,7 @@ public class Globals {
     private User currentUser;
     private static Globals instance;
 
+
     public Globals(){
     }
 
