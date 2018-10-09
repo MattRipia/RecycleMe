@@ -91,7 +91,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 Toast.makeText(this, "Contact Us - Coming Soon", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.nav_about:
-                Toast.makeText(this, "About Us - Coming Soon", Toast.LENGTH_SHORT).show();
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new AboutFragment(),"about_fragment").addToBackStack("about nav").commit();
                 break;
         }
 
