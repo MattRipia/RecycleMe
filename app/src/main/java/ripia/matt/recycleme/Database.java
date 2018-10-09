@@ -8,6 +8,7 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -189,10 +190,11 @@ public class Database {
     // this method adds an item to the hostory table on the database, this table is a child on the item and account table and keeps a record of a users scan history
     protected void addHistoryItem(){
 
-        //Date currentTime = Calendar.getInstance().getTime();
-        String insertItemToHistory = "insert into history(uniqueid, barcode) values('"
+        String currentDateTime = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date());
+        String insertItemToHistory = "insert into history values('"
                 + globals.getCurrentUser().getUniqueID() + "','"
-                + globals.getCurrentItem().getBarcode() + "')";
+                + globals.getCurrentItem().getBarcode() + "','"
+                + currentDateTime + "')";
 
         try {
             statement.executeUpdate(insertItemToHistory);
