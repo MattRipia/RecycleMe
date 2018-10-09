@@ -1,6 +1,9 @@
 package ripia.matt.recycleme;
 
+import android.content.Context;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
@@ -95,19 +98,33 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
     //checks if a user is already logged in, if they are, then updates the UI
     protected void onStart() {
         super.onStart();
-        FirebaseUser currentUser = firebaseAuth.getCurrentUser();
 
-        if (currentUser != null) {
-            updateUI(currentUser);
-        }
     }
 
     // once a user successfully logs in, this method is called, changes the UI to the main activity
     public void updateUI(FirebaseUser firebaseUser) {
-        if (firebaseUser != null) {
-            startActivity(new Intent(this, MainActivity.class));
-            finish();
+
+        if(checkNetworkActive()) {
+            if (firebaseUser != null ) {
+                startActivity(new Intent(this, MainActivity.class));
+                finish();
+            }
         }
+        else {
+            Toast.makeText(this, "No Internet Connection!", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    private boolean checkNetworkActive() {
+        boolean connected = false;
+        ConnectivityManager connectivityManager = (ConnectivityManager)getSystemService(Context.CONNECTIVITY_SERVICE);
+
+        NetworkInfo networkInfo = connectivityManager.getActiveNetworkInfo();
+
+        if(networkInfo != null && networkInfo.isConnected()) {
+            connected = true;
+        }
+        return connected;
     }
 
     @Override
@@ -226,7 +243,7 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
                 handleGoogleAccessToken(account);
 
             } catch (ApiException e) {
-                // Google Sign In failed, update UI appropriately
+                // Google Sign In failed
                 Toast.makeText(this, "Google login failed", Toast.LENGTH_LONG).show();
                 Log.d("google sign in log", " error - " + e.getMessage());
             }
@@ -254,7 +271,6 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
                 {
                     // If sign in fails, display a message to the user.
                     updateUI(firebaseAuth.getCurrentUser());
-                    Toast.makeText(getApplicationContext(), "firebase auth with google - failed!", Toast.LENGTH_LONG).show();
                     Log.d("google firebase auth", "sign in with google on firebase failed");
                 }
             }

@@ -17,7 +17,6 @@ import android.widget.TextView;
 public class HomeFragment extends Fragment {
 
     private Globals globals;
-    private TextView welcomeText;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -31,7 +30,6 @@ public class HomeFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_home, container, false);
 
-        welcomeText = view.findViewById(R.id.welcome_text);
         return view;
     }
 }
