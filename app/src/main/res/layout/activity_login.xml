@@ -6,7 +6,7 @@
     tools:context=".LoginActivity"
     android:orientation="vertical"
     android:gravity="center_horizontal"
-    android:background="@drawable/loginv2"
+    android:background="@drawable/logo"
     tools:layout_editor_absoluteY="50dp">
 
     <LinearLayout
