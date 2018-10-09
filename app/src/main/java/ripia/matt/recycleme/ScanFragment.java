@@ -32,28 +32,8 @@ public class ScanFragment extends Fragment implements View.OnClickListener{
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_scan, container, false);
 
-//        // populates some junk data for us
-//        for(int i = 0; i < 3; i++)
-//        {
-//            Item item = new Item();
-//            item.setName("nice");
-//            item.setRecNumber(1);
-//            item.setBrand("good brand");
-//            item.setBarcode("000000000");
-//            globals.getCurrentUser().getItems().add(item);
-//
-//            for(int k = 0; k < 3; k++)
-//            {
-//                Item itemInner = new Item();
-//                itemInner.setName("bad");
-//                itemInner.setRecNumber(3);
-//                itemInner.setBrand("bad Brand");
-//                itemInner.setBarcode("666666666");
-//                globals.getCurrentUser().getItems().add(itemInner);
-//            }
-//        }
+        View view = inflater.inflate(R.layout.fragment_scan, container, false);
 
         // clears the current item in a users history
         globals.getCurrentUser().getItems().clear();
@@ -62,11 +42,11 @@ public class ScanFragment extends Fragment implements View.OnClickListener{
         // syncs the view with the database
         globals.getDatabase().syncItemHistory();
 
-        if(globals.getCurrentItem().getRecNumber() != 0)
-        {
-            globals.getCurrentUser().getItems().remove(globals.getCurrentItem());
-            globals.getCurrentUser().getItems().add(0, globals.getCurrentItem());
-        }
+//        if(globals.getCurrentItem().getRecNumber() != 0)
+//        {
+//            globals.getCurrentUser().getItems().remove(globals.getCurrentItem());
+//            globals.getCurrentUser().getItems().add(0, globals.getCurrentItem());
+//        }
 
         // this adapter is added to the list so we can populate items from this and have a custom layout.
         adapter = new CustomAdapter(getContext(), globals.getCurrentUser().getItems());
