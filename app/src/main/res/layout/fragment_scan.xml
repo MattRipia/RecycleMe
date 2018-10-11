@@ -5,13 +5,12 @@
     android:layout_height="match_parent"
     android:background="@drawable/bgforest">
 
-
     <TextView
         android:id="@+id/last_scanned_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:text="Scan History"
+        android:text="@string/scan_history"
         android:textColor="@android:color/white"
         android:textSize="30sp" />
 
@@ -32,7 +31,7 @@
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:background="@drawable/round_button"
-        android:text="TAP TO SCAN"
+        android:text="@string/tap_to_scan"
         android:textColor="@android:color/background_light" />
 
 </RelativeLayout>
