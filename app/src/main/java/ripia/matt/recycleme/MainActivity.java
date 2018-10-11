@@ -67,17 +67,15 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
 
+        getSupportFragmentManager().popBackStack();
         switch (item.getItemId()) {
             case R.id.nav_home:
-                getSupportFragmentManager().popBackStack();
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new HomeFragment(), "home_fragment").commit();
                 break;
             case R.id.nav_scan:
-                getSupportFragmentManager().popBackStack();
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new ScanFragment(),"scan_fragment").addToBackStack("scan nav").commit();
                 break;
             case R.id.nav_account:
-                getSupportFragmentManager().popBackStack();
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new AccountFragment(),"account_fragment").addToBackStack("account nav").commit();
                 break;
             case R.id.nav_log_out:

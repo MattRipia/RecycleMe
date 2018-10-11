@@ -38,10 +38,10 @@
     </item>
     <item android:title="@string/nav_manage">
         <menu>
-            <item
-                android:id="@+id/nav_share"
-                android:icon="@drawable/ic_share"
-                android:title="@string/nav_share"/>
+            <!--<item-->
+                <!--android:id="@+id/nav_share"-->
+                <!--android:icon="@drawable/ic_share"-->
+                <!--android:title="@string/nav_share"/>-->
             <item
                 android:id="@+id/nav_log_out"
                 android:icon="@drawable/ic_logout"
