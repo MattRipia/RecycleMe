@@ -22,6 +22,10 @@
         <menu>
             <group android:checkableBehavior="single">
                 <item
+                    android:id="@+id/nav_leaderboard"
+                    android:icon="@drawable/ic_leaderboard"
+                    android:title="@string/nav_leaderboard"/>
+                <item
                     android:id="@+id/nav_notifications"
                     android:icon="@drawable/ic_notifications"
                     android:title="@string/nav_notifications"/>
@@ -38,10 +42,10 @@
     </item>
     <item android:title="@string/nav_manage">
         <menu>
-            <item
-                android:id="@+id/nav_share"
-                android:icon="@drawable/ic_share"
-                android:title="@string/nav_share"/>
+            <!--<item-->
+                <!--android:id="@+id/nav_share"-->
+                <!--android:icon="@drawable/ic_share"-->
+                <!--android:title="@string/nav_share"/>-->
             <item
                 android:id="@+id/nav_log_out"
                 android:icon="@drawable/ic_logout"
