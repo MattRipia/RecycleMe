@@ -13,4 +13,16 @@
     <string name="query_recycling_number">The barcode you have scanned does not currently have a recycling number, please help us out by providing this for our records!</string>
     <string name="recycleme_details">This application is used to scan the barcode\'s of items to get recycling information about them. Users can also provide
     their location to get their recycling zone information which is retrieved by the Auckland Council website! Thanks for using our app.</string>
+    <string name="nav_home">Home</string>
+    <string name="nav_scan">Scan</string>
+    <string name="nav_account">Account</string>
+    <string name="nav_manage">Manage</string>
+    <string name="nav_log_out">Log Out</string>
+    <string name="nav_notifications">Notifications</string>
+    <string name="nav_more">More</string>
+    <string name="nav_share">Share</string>
+    <string name="nav_contact_us">Contact Us</string>
+    <string name="nav_about_us">About Us</string>
+    <string name="contact_us">Contact Us</string>
+    <string name="notifications">Notifications</string>
 </resources>
