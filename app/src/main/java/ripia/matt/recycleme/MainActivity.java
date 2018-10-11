@@ -67,29 +67,30 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
 
+        getSupportFragmentManager().popBackStack();
         switch (item.getItemId()) {
             case R.id.nav_home:
-                getSupportFragmentManager().popBackStack();
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new HomeFragment(), "home_fragment").commit();
                 break;
             case R.id.nav_scan:
-                getSupportFragmentManager().popBackStack();
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new ScanFragment(),"scan_fragment").addToBackStack("scan nav").commit();
                 break;
             case R.id.nav_account:
-                getSupportFragmentManager().popBackStack();
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new AccountFragment(),"account_fragment").addToBackStack("account nav").commit();
                 break;
             case R.id.nav_log_out:
                 Toast.makeText(this, "Log Out", Toast.LENGTH_SHORT).show();
                 logout();
                 break;
+            case R.id.nav_leaderboard:
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new LeaderboardFragment(),"leaderboard_fragment").addToBackStack("leaderboard nav").commit();
+                break;
             case R.id.nav_notifications:
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new NotificationsFragment(),"notifications_fragment").addToBackStack("notifications nav").commit();
                 break;
-            case R.id.nav_share:
-                Toast.makeText(this, "Share - Coming Soon", Toast.LENGTH_SHORT).show();
-                break;
+//            case R.id.nav_share:
+//                Toast.makeText(this, "Share - Coming Soon", Toast.LENGTH_SHORT).show();
+//                break;
             case R.id.nav_contact_us:
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new ContactFragment(),"contact_fragment").addToBackStack("contact nav").commit();
                 break;

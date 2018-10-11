@@ -74,5 +74,3 @@ public class ScanFragment extends Fragment implements View.OnClickListener{
         scanIntegrator.initiateScan();
     }
 }
-
-
