@@ -18,34 +18,34 @@
             android:title="@string/nav_account"/>
     </group>
 
-    <item android:title="@string/nav_manage">
+    <item android:title="@string/nav_more">
         <menu>
-            <item
-                android:id="@+id/nav_log_out"
-                android:icon="@drawable/ic_logout"
-                android:title="@string/nav_log_out"/>
-            <item
-                android:id="@+id/nav_notifications"
-                android:icon="@drawable/ic_notifications"
-                android:title="@string/nav_notifications"/>
-
+            <group android:checkableBehavior="single">
+                <item
+                    android:id="@+id/nav_notifications"
+                    android:icon="@drawable/ic_notifications"
+                    android:title="@string/nav_notifications"/>
+                <item
+                    android:id="@+id/nav_contact_us"
+                    android:icon="@drawable/ic_contact"
+                    android:title="@string/nav_contact_us"/>
+                <item
+                    android:id="@+id/nav_about"
+                    android:icon="@drawable/ic_about"
+                    android:title="@string/nav_about_us"/>
+            </group>
         </menu>
     </item>
-    <item android:title="@string/nav_more">
+    <item android:title="@string/nav_manage">
         <menu>
             <item
                 android:id="@+id/nav_share"
                 android:icon="@drawable/ic_share"
                 android:title="@string/nav_share"/>
             <item
-                android:id="@+id/nav_contact_us"
-                android:icon="@drawable/ic_contact"
-                android:title="@string/nav_contact_us"/>
-            <item
-                android:id="@+id/nav_about"
-                android:icon="@drawable/ic_about"
-                android:title="@string/nav_about_us"/>
+                android:id="@+id/nav_log_out"
+                android:icon="@drawable/ic_logout"
+                android:title="@string/nav_log_out"/>
         </menu>
     </item>
-
 </menu>

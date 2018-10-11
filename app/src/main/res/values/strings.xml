@@ -23,4 +23,6 @@
     <string name="nav_share">Share</string>
     <string name="nav_contact_us">Contact Us</string>
     <string name="nav_about_us">About Us</string>
+    <string name="contact_us">Contact Us</string>
+    <string name="notifications">Notifications</string>
 </resources>

@@ -9,11 +9,11 @@ import android.view.View;
 import android.view.ViewGroup;
 
 /**
- * This fragment is used to show the about us screen to the user.
+ * This fragment is used to show the contact us screen to the user.
  *
  */
 
-public class AboutFragment extends Fragment {
+public class ContactFragment extends Fragment {
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -24,7 +24,7 @@ public class AboutFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_about, container, false);
+        View view = inflater.inflate(R.layout.fragment_contact, container, false);
 
         return view;
     }
