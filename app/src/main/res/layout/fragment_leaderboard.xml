@@ -1,15 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="@drawable/logo"
-    android:gravity="center"
     android:padding="30dp">
 
     <TextView
+        android:id="@+id/last_scanned_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/nav_leaderboard"
-        android:textSize="18sp" />
-</RelativeLayout>
+        android:textColor="@android:color/black"
+        android:textSize="30sp" />
+
+    <ListView
+        android:layout_width="match_parent"
+        android:layout_height="400dp">
+
+    </ListView>
+</LinearLayout>

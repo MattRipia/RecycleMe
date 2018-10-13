@@ -7,13 +7,10 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
-import android.widget.TextView;
-import com.google.zxing.integration.android.IntentIntegrator;
 
-import java.util.List;
+import com.google.zxing.integration.android.IntentIntegrator;
 
 public class ScanFragment extends Fragment implements View.OnClickListener{
 
@@ -21,7 +18,7 @@ public class ScanFragment extends Fragment implements View.OnClickListener{
     private Globals globals;
 
     private ListView list;
-    private CustomAdapter adapter;
+    private ScanHistoryAdapter adapter;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -49,7 +46,7 @@ public class ScanFragment extends Fragment implements View.OnClickListener{
 //        }
 
         // this adapter is added to the list so we can populate items from this and have a custom layout.
-        adapter = new CustomAdapter(getContext(), globals.getCurrentUser().getItems());
+        adapter = new ScanHistoryAdapter(getContext(), globals.getCurrentUser().getItems());
 
         scanButton = view.findViewById(R.id.scan_button);
         list = view.findViewById(R.id.history_list);

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="10dp">
+
+    <ImageView
+        android:id="@+id/leader_icon"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:src="@drawable/gold-medal"/>
+
+    <TextView
+        android:id="@+id/user_name"
+        android:layout_width="250dp"
+        android:layout_height="30dp"
+        android:textSize="20sp"
+        android:text="User Name"/>
+
+    <TextView
+        android:id="@+id/user_points"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:textSize="20sp"
+        android:text="200"
+        android:textAlignment="center"/>
+
+</LinearLayout>
