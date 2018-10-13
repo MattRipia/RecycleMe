@@ -9,6 +9,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -233,6 +234,36 @@ public class Database {
         }
 
         Log.d("syncItemHistory", " syncItemHistory");
+    }
+
+    public ArrayList<User> getLeaders() {
+
+        ArrayList<User> leaders = new ArrayList<>();
+
+        ResultSet rs;
+        String queryLeaders = "select * from account order by points fetch first 10 rows only";
+
+        try {
+            rs = statement.executeQuery(queryLeaders);
+
+            // whiles there is a result, add the row
+            while(rs.next())
+            {
+                User aUser = new User();
+                aUser.setUniqueID(rs.getString(1));
+                aUser.setName(rs.getString(2));
+                aUser.setPoints(rs.getInt(4));
+                Log.d("leaders", " User Exists in DB");
+
+                leaders.add(aUser);
+            }
+        } catch (SQLException e) {
+            Log.d("syncItemHistory ex", " error - " + e);
+        }
+
+        Log.d("syncItemHistory", " syncItemHistory");
+
+        return leaders;
     }
 }
 

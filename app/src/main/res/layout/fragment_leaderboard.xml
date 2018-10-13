@@ -14,8 +14,7 @@
         android:textSize="30sp" />
 
     <ListView
+        android:id="@+id/leader_list"
         android:layout_width="match_parent"
-        android:layout_height="400dp">
-
-    </ListView>
+        android:layout_height="400dp"/>
 </LinearLayout>
