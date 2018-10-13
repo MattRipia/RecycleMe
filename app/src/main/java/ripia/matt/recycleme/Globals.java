@@ -1,5 +1,7 @@
 package ripia.matt.recycleme;
 
+import android.util.Log;
+
 import java.util.ArrayList;
 
 /**
@@ -31,6 +33,8 @@ public class Globals {
     }
 
     public ArrayList<User> getLeaders() {
+
+        Log.d("leaders", " Getting leaders - Globals class");
 
         if (leaders != null) {
             return leaders;

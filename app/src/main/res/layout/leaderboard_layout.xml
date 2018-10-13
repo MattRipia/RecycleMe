@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/lb_row_container"
     android:orientation="horizontal"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -9,12 +10,11 @@
     <ImageView
         android:id="@+id/leader_icon"
         android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:src="@drawable/lb_gold_medal"/>
+        android:layout_height="50dp"/>
 
     <TextView
         android:id="@+id/user_name"
-        android:layout_width="250dp"
+        android:layout_width="180dp"
         android:layout_height="50dp"
         android:text="User Name"
         android:textSize="20sp" />

@@ -9,6 +9,7 @@
         android:id="@+id/last_scanned_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_gravity="center"
         android:text="@string/nav_leaderboard"
         android:textColor="@android:color/black"
         android:textSize="30sp" />
@@ -16,5 +17,5 @@
     <ListView
         android:id="@+id/leader_list"
         android:layout_width="match_parent"
-        android:layout_height="400dp"/>
+        android:layout_height="match_parent" />
 </LinearLayout>
