@@ -16,15 +16,15 @@
             android:id="@+id/nav_account"
             android:icon="@drawable/ic_account"
             android:title="@string/nav_account"/>
+        <item
+            android:id="@+id/nav_leaderboard"
+            android:icon="@drawable/ic_leaderboard"
+            android:title="@string/nav_leaderboard"/>
     </group>
 
     <item android:title="@string/nav_more">
         <menu>
             <group android:checkableBehavior="single">
-                <item
-                    android:id="@+id/nav_leaderboard"
-                    android:icon="@drawable/ic_leaderboard"
-                    android:title="@string/nav_leaderboard"/>
                 <item
                     android:id="@+id/nav_notifications"
                     android:icon="@drawable/ic_notifications"
