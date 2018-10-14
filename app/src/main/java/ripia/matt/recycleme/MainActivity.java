@@ -107,12 +107,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     @Override
     // closes the navigation draw if its open
     public void onBackPressed() {
+        
         if (drawer.isDrawerOpen(GravityCompat.START))
         {
             drawer.closeDrawer(GravityCompat.START);
         }
         else
         {
+            navigationView.setCheckedItem(R.id.nav_home);
             super.onBackPressed();
         }
     }
