@@ -36,13 +36,15 @@ public class Globals {
 
         Log.d("leaders", " Getting leaders - Globals class");
 
-        if (leaders != null) {
-            return leaders;
-        }
-        else {
+//        if (leaders != null) {
+//            return leaders;
+//        }
+//        else {
+
             leaders = database.getLeaders();
             return leaders;
-        }
+
+//        }
     }
 
     public User getCurrentUser() {

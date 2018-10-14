@@ -92,8 +92,6 @@ public class AccountFragment extends Fragment implements View.OnClickListener{
         }
     }
 
-
-
     // sets the current location of 'currentuser' when the user clicks the 'get location' button,
     // this location is used when checking the recycling zone of that user.
     private void getCurrentLocation() {
