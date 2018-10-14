@@ -1,5 +1,9 @@
 package ripia.matt.recycleme;
 
+import android.util.Log;
+
+import java.util.ArrayList;
+
 /**
 *  this is a class which holds all of the global variables, these are used in most other classes
 *  as the same instance variables need to be used thorughout our application. This class uses a
@@ -15,7 +19,7 @@ public class Globals {
     private Item currentItem;
     private User currentUser;
     private static Globals instance;
-
+    private ArrayList<User> leaders;
 
     public Globals(){
     }
@@ -26,6 +30,19 @@ public class Globals {
             instance = new Globals();
         }
         return instance;
+    }
+
+    public ArrayList<User> getLeaders() {
+
+        Log.d("leaders", " Getting leaders - Globals class");
+
+        if (leaders != null) {
+            return leaders;
+        }
+        else {
+            leaders = database.getLeaders();
+            return leaders;
+        }
     }
 
     public User getCurrentUser() {

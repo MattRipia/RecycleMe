@@ -9,7 +9,7 @@ import android.widget.ArrayAdapter;
 import android.widget.TextView;
 import java.util.ArrayList;
 
-public class CustomAdapter extends ArrayAdapter<Item> implements View.OnClickListener {
+public class ScanHistoryAdapter extends ArrayAdapter<Item> implements View.OnClickListener {
 
     private ArrayList<Item> list;
     private int lastPosition = -1;
@@ -23,8 +23,8 @@ public class CustomAdapter extends ArrayAdapter<Item> implements View.OnClickLis
         TextView recNumber;
     }
 
-    public CustomAdapter(@NonNull Context context, ArrayList<Item> items) {
-        super(context, R.layout.adapter_view_layout, items);
+    public ScanHistoryAdapter(@NonNull Context context, ArrayList<Item> items) {
+        super(context, R.layout.scan_history_layout, items);
         this.list = items;
         //this.mContext = context;
     }
@@ -51,9 +51,9 @@ public class CustomAdapter extends ArrayAdapter<Item> implements View.OnClickLis
             // new inflator
             LayoutInflater inflater = LayoutInflater.from(getContext());
 
-            convertView = inflater.inflate(R.layout.adapter_view_layout, parent, false);
+            convertView = inflater.inflate(R.layout.scan_history_layout, parent, false);
 
-            // converts the id's of the text views in the adapter_view_layout to a view holder.
+            // converts the id's of the text views in the scan_history_layout to a view holder.
             // We can change the fields using the view holder.
             viewHolder.name = convertView.findViewById(R.id.list_item_name);
             viewHolder.barcode = convertView.findViewById(R.id.list_item_barcode);

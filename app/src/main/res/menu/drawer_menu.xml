@@ -42,6 +42,7 @@
     </item>
     <item android:title="@string/nav_manage">
         <menu>
+            <!--TODO remove the share item, string resource, and icon file-->
             <!--<item-->
                 <!--android:id="@+id/nav_share"-->
                 <!--android:icon="@drawable/ic_share"-->
