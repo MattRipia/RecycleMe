@@ -243,7 +243,7 @@ public class Database {
         ArrayList<User> leaders = new ArrayList<>();
 
         ResultSet rs;
-        String queryLeaders = "select top 10 * from account where name is not null order by points desc";
+        String queryLeaders = "select top 10 * from account where name != 'null' and name != '' order by points desc";
 
         Log.d("leaders", " Getting leaders - Database class");
         try {
