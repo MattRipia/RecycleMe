@@ -107,12 +107,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     @Override
     // closes the navigation draw if its open
     public void onBackPressed() {
+
         if (drawer.isDrawerOpen(GravityCompat.START))
         {
             drawer.closeDrawer(GravityCompat.START);
         }
         else
         {
+            navigationView.setCheckedItem(R.id.nav_home);
             super.onBackPressed();
         }
     }
@@ -141,7 +143,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     // the item exists in the database, update the UI now
                     // Re initializing the scan fragment to update the result field
                     // adds the item to an arraylist of items, to be displayed.
-                   //globals.getCurrentUser().addItemToList(globals.getCurrentItem());
                     globals.getDatabase().addHistoryItem();
                     getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new ScanFragment(),"scan_fragment").commit();
                     Toast.makeText(this, "Scan success", Toast.LENGTH_SHORT).show();
@@ -150,6 +151,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 else
                 {
                     getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new ItemFormFragment(),"get_recycling_number_fragment").commit();
+                }
+
+                try{
+                    globals.getDatabase().updateDatabase();
+
+                } catch (Exception e)
+                {
+                    Log.d("finish exception" , " error - " + e.getMessage());
                 }
             }
             else

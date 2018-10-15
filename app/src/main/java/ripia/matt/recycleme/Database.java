@@ -2,6 +2,8 @@ package ripia.matt.recycleme;
 
 import android.os.StrictMode;
 import android.util.Log;
+import android.widget.Toast;
+
 import com.google.firebase.auth.FirebaseUser;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -9,6 +11,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -233,6 +236,40 @@ public class Database {
         }
 
         Log.d("syncItemHistory", " syncItemHistory");
+    }
+
+    public ArrayList<User> getLeaders() {
+
+        ArrayList<User> leaders = new ArrayList<>();
+
+        ResultSet rs;
+        String queryLeaders = "select top 10 * from account where name != 'null' and name != '' order by points desc";
+
+        Log.d("leaders", " Getting leaders - Database class");
+        try {
+            rs = statement.executeQuery(queryLeaders);
+            Log.d("leaders", " Getting leaders - Query sent");
+
+            // whiles there is a result, add the row
+            while(rs.next())
+            {
+                Log.d("leaders", "user" + rs.getString(2));
+                Log.d("leaders", "user" + rs.getInt(4));
+
+                User aUser = new User();
+                aUser.setUniqueID(rs.getString(1));
+                aUser.setName(rs.getString(2));
+                aUser.setPoints(rs.getInt(4));
+                Log.d("leaders", " User Exists in DB");
+
+                leaders.add(aUser);
+            }
+        } catch (SQLException e) {
+            Log.d("leaders", " Getting leaders - sql exception");
+            Log.d("leaders", " error - " + e);
+
+        }
+        return leaders;
     }
 }
 
