@@ -17,7 +17,7 @@
     <ListView
         android:id="@+id/leader_list"
         android:layout_width="350dp"
-        android:layout_height="match_parent"
+        android:layout_height="517dp"
         android:layout_gravity="center"
-        android:background="@color/cardview_dark_background"/>
+        android:background="@color/cardview_dark_background" />
 </LinearLayout>
