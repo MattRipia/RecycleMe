@@ -1,44 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/bgforestdarktop">
-
-    <ImageView
-        android:id="@+id/logo"
-        android:layout_width="181dp"
-        android:layout_height="84dp"
-        android:layout_alignParentTop="true"
-        android:layout_alignStart="@+id/profile_text"
-        android:layout_marginTop="13dp"
-        android:src="@drawable/rmlogowhite" />
-
-    <TextView
-        android:id="@+id/text"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/logo"
-        android:layout_marginLeft="10dp"
-        android:text="@string/recycleme_details"
-        android:textColor="@android:color/background_light" />
-
-    <TextView
-        android:id="@+id/profile_text"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/text"
-        android:layout_marginLeft="10dp"
-        android:text="Profile:"
-        android:textColor="@android:color/background_light" />
+    android:background="@drawable/accountbg">
 
     <TextView
         android:id="@+id/user_detail_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/profile_text"
-        android:layout_marginLeft="10dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="39dp"
+        android:layout_marginTop="165dp"
         android:text="Details"
-        android:textColor="@android:color/background_light" />
+        android:textColor="#1a4b03" />
 
     <Button
         android:id="@+id/zone_button"
@@ -52,18 +28,20 @@
         android:fontFamily="@font/architects_daughter"
         android:text="Zone"
         android:textColor="@android:color/background_light"
-        android:textStyle="bold" />
+        android:textStyle="bold"
+        android:visibility="gone" />
 
     <Button
         android:id="@+id/address_button"
-        android:layout_width="114dp"
-        android:layout_height="36dp"
-        android:layout_alignParentStart="true"
-        android:layout_alignTop="@+id/zone_button"
-        android:layout_marginStart="56dp"
-        android:background="@color/common_google_signin_btn_text_light_pressed"
-        android:fontFamily="@font/architects_daughter"
+        android:layout_width="154dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="47dp"
+        android:background="#1a4b03"
+        android:fontFamily="@font/michroma"
         android:text="Get Address"
         android:textColor="@android:color/background_light"
+        android:textSize="12sp"
         android:textStyle="bold" />
 </RelativeLayout>
