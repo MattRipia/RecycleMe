@@ -13,6 +13,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.Toast;
 import com.facebook.login.LoginManager;
 import com.google.firebase.auth.FirebaseAuth;
@@ -210,5 +211,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         }
 
         super.finish();
+    }
+
+    public void setDate(View view)
+    {
+        NotificationsFragment notificationsFragment = new NotificationsFragment();
+        notificationsFragment.show(getSupportFragmentManager(),"date_picker");
     }
 }

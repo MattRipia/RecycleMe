@@ -7,9 +7,16 @@
     android:gravity="center"
     android:padding="30dp">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/nav_notifications"
-        android:textSize="18sp" />
+    <Button
+        android:id="@+id/button2"
+        android:layout_width="316dp"
+        android:layout_height="45dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="242dp"
+        android:background="@color/colorPrimary"
+        android:fontFamily="@font/michroma"
+        android:onClick="setDate"
+        android:text="SET UP A REMINDER"
+        android:textColor="@android:color/background_light" />
 </RelativeLayout>
