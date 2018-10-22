@@ -26,4 +26,6 @@
     <string name="nav_leaderboard">Leaderboard</string>
     <string name="scan_history">Scan History</string>
     <string name="tap_to_scan">TAP TO SCAN</string>
+    <string name="zone">Zone</string>
+    <string name="get_address">Get Address</string>
 </resources>

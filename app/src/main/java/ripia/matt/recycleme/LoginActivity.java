@@ -45,10 +45,10 @@ import com.google.firebase.auth.GoogleAuthProvider;
 public class LoginActivity extends AppCompatActivity implements GoogleApiClient.OnConnectionFailedListener, View.OnClickListener {
 
     // Variables for logging in and databases
-    CallbackManager callbackManager;
-    GoogleApiClient nGoogleApiClient;
-    FirebaseAuth firebaseAuth;
-    GoogleSignInAccount account = null;
+    private CallbackManager callbackManager;
+    private GoogleApiClient nGoogleApiClient;
+    private FirebaseAuth firebaseAuth;
+    private GoogleSignInAccount account = null;
 
     // the buttons which need referencing
     private SignInButton googleSignInButton;

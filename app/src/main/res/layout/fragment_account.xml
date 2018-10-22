@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/accountbg">
@@ -14,7 +13,8 @@
         android:layout_marginStart="39dp"
         android:layout_marginTop="165dp"
         android:text="Details"
-        android:textColor="#1a4b03" />
+        android:textColor="#1a4b03"
+        android:textSize="20sp"/>
 
     <Button
         android:id="@+id/zone_button"
@@ -26,7 +26,7 @@
         android:layout_marginEnd="56dp"
         android:background="@color/common_google_signin_btn_text_light_pressed"
         android:fontFamily="@font/architects_daughter"
-        android:text="Zone"
+        android:text="@string/zone"
         android:textColor="@android:color/background_light"
         android:textStyle="bold"
         android:visibility="gone" />
@@ -40,7 +40,7 @@
         android:layout_marginBottom="47dp"
         android:background="#1a4b03"
         android:fontFamily="@font/michroma"
-        android:text="Get Address"
+        android:text="@string/get_address"
         android:textColor="@android:color/background_light"
         android:textSize="12sp"
         android:textStyle="bold" />
