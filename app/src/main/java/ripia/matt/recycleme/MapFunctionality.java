@@ -63,7 +63,7 @@ import java.util.List;
         private static final int LOCATION_PERMISSION_REQUEST_CODE = 1234;
         private static final float DEFAULT_ZOOM = 15f;
         private static final int PLACE_PICKER_REQUEST = 1;
-        private final LatLngBounds LAT_LNG_BOUNDS = new LatLngBounds(new LatLng(-40, -168), new LatLng(71, 136));
+        private final LatLngBounds LAT_LNG_BOUNDS = new LatLngBounds(new LatLng(-36.854, 174.77), new LatLng(-36.854, 174.77));
 
         //widgets
         private AutoCompleteTextView mSearchText;
@@ -267,7 +267,7 @@ import java.util.List;
                 Log.e(TAG, "getDeviceLocation: SecurityException: " + e.getMessage() );
             }
         }
-
+        //move the camera to the searched/selected location
         private void moveCamera(LatLng latLng, float zoom, PlaceInfo placeInfo){
             Log.d(TAG, "moveCamera: moving the camera to: lat: " + latLng.latitude + ", lng: " + latLng.longitude );
             mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, zoom));
@@ -284,11 +284,13 @@ import java.util.List;
                             "Price Rating: " + placeInfo.getRating() + "\n";
 
                     globals.getCurrentUser().setAddress(placeInfo.getAddress());
-
+                    //hideSoftKeyboard();
+                    onBackPressed();
+                    Toast.makeText(MapFunctionality.this, "Your current address has been set", Toast.LENGTH_LONG).show();
                     MarkerOptions options = new MarkerOptions().position(latLng).title(placeInfo.getName()).snippet(snippet);
                     mMarker = mMap.addMarker(options);
 
-                }catch (NullPointerException e){
+                }catch (Exception e){
                     Log.e(TAG, "moveCamera: NullPointerException: " + e.getMessage() );
                 }
             }
