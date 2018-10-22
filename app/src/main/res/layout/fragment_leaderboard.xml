@@ -3,21 +3,24 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="@drawable/bgforest">
+    android:background="@drawable/bgforest"
+    android:padding="10dp">
 
     <TextView
         android:id="@+id/last_scanned_text"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
         android:layout_gravity="center"
         android:text="@string/nav_leaderboard"
         android:textColor="@color/cardview_light_background"
-        android:textSize="30sp" />
+        android:textSize="30sp"
+        android:layout_weight="10"/>
 
     <ListView
         android:id="@+id/leader_list"
         android:layout_width="350dp"
-        android:layout_height="517dp"
         android:layout_gravity="center"
-        android:background="@color/cardview_dark_background" />
+        android:background="@color/cardview_dark_background"
+        android:layout_weight="90"
+        android:layout_height="0dp" />
 </LinearLayout>
