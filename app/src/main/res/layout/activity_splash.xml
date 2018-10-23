@@ -3,15 +3,15 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:background="@android:color/darker_gray">
+    tools:background="@android:color/white">
 
     <ImageView
         android:id="@+id/logo"
-        android:layout_width="168dp"
-        android:layout_height="110dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="207dp"
-        android:src="@drawable/rmlogo" />
+        android:src="@drawable/logo"
+        android:contentDescription="@string/logo" />
 
 </RelativeLayout>
