@@ -62,12 +62,17 @@ public class AccountFragment extends Fragment implements View.OnClickListener{
         addressButton.setOnClickListener(this);
         zoneButton.setOnClickListener(this);
 
+        if(globals.getCurrentItem().getBarcode() == null || globals.getCurrentItem().getBarcode().equals("null") )
+        {
+            globals.getCurrentItem().setBarcode("");
+        }
+
         update();
         return view;
     }
 
     private void update() {
-
+        
         profileText.setText("User          - " + globals.getCurrentUser().getName() + "\n"
                 + "Points       - " + globals.getCurrentUser().getPoints() + "\n"
                 + "Address    - " + globals.getCurrentUser().getAddress() + "\n"
